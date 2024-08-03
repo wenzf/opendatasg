@@ -1,0 +1,72 @@
+/* reset */
+.rdx_cbx_root button {
+  all: unset;
+}
+
+.cbx_frame {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-top: 2rem;
+}
+
+@media screen and (max-width: 512px) {
+  .cbx_frame {
+    flex-direction: column;
+  }
+}
+
+.rdx_cbx_fr {
+  display: inline-flex;
+  background-color: var(--gray-3);
+  padding: 0.75rem;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rdx_cbx_root {
+  background-color: var(--gray-1);
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: inset 1px 1px 2px 1px var(--gray-7);
+  cursor: pointer;
+}
+
+.light .rdx_cbx_root {
+  box-shadow: inset 1px 1px 2px 1px var(--gray-7);
+}
+
+@media (prefers-color-scheme: dark) {
+  .rdx_cbx_root {
+    box-shadow: inset -1px -1px 2px 1px var(--gray-7);
+  }
+}
+
+.dark .rdx_cbx_root {
+  box-shadow: inset -1px -1px 2px 1px var(--gray-7);
+}
+
+.rdx_cbx_root:hover {
+  background-color: var(--green-3);
+}
+.rdx_cbx_root:focus {
+  box-shadow: 0 0 0 2px var(--gray-10);
+}
+
+.rdx_cbx_ind {
+  color: var(--green-11);
+}
+
+.Label {
+  color: var(--gray-1);
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
+}

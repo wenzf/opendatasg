@@ -1,0 +1,37 @@
+.scroll_up_btn {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.scroll_up_btn.show_btn {
+  opacity: 1;
+  animation: 0.3s show_scroll_up_btn;
+  pointer-events: all;
+}
+
+.scroll_up_btn button {
+  background-color: var(--green-9);
+  color: #fff;
+}
+
+.scroll_up_btn.show_btn button:hover svg {
+  color: var(--gray-12);
+}
+
+.scroll_up_btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes show_scroll_up_btn {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

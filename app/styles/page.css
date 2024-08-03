@@ -1,0 +1,36 @@
+.page_feed {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.page_feed.forbot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.page_feed h1 {
+  font-size: 1.5rem;
+  color: var(--gray-12);
+
+}
+
+.forbot .title_frame {
+  width: 100%;
+ 
+  padding-bottom: 2rem;
+}
+
+.masonry {
+  padding-top: 2rem;
+}
+
+.no_results {
+  font-size: 1.25rem;
+  background-color: var(--gray-2);
+  border: 1px solid var(--gray-6);
+  padding: 1rem;
+  text-align: center;
+}

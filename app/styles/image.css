@@ -1,0 +1,24 @@
+.page_image {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.page_image.expanded {
+  max-width: 100%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: max-content;
+}
+
+.page_image img {
+  height: auto;
+  max-inline-size: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .expand_btn {
+    display: none;
+  }
+}

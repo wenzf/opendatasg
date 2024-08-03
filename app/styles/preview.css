@@ -1,0 +1,68 @@
+.preview {
+  background-color: var(--gray-2);
+  box-shadow: 0 0 0 1px var(--gray-4);
+  overflow: hidden;
+}
+
+.preview_inner {
+  text-decoration: none;
+  display: block;
+  margin: 3px;
+  line-height: 1.38;
+}
+
+.forbot .preview_inner {
+  max-width: 380px;
+}
+
+.preview time,
+.preview_inner p,
+.preview_inner h2 {
+  padding: 0.25rem;
+}
+
+.preview_inner img {
+  transition: transform 0.3s;
+  max-width: 100%;
+}
+
+.preview_inner h2 {
+  color: var(--gray-12);
+  font-size: 1.125rem;
+  padding-top: 0.5rem;
+}
+
+.preview_inner p {
+  color: var(--gray-11);
+}
+
+.preview time {
+  color: var(--gray-12);
+  font-size: 0.925rem;
+  display: block;
+}
+
+.preview_inner:hover {
+  background-color: var(--gray-3);
+}
+
+.preview_inner:hover p {
+  color: var(--gray-12);
+}
+
+.preview_inner:hover img {
+  transform: scale(1.01);
+}
+
+.preview_inner:active {
+  background-color: var(--gray-5);
+}
+
+.preview_inner:focus {
+  box-shadow: 0px 0px 0px 3px var(--gray-10);
+}
+
+mark.highlight_txt {
+  background-color: var(--green-11);
+  color: var(--green-1);
+}

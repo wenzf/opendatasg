@@ -1,0 +1,109 @@
+.map_frame {
+  position: relative;
+  max-width: 768px;
+  display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.map_frame svg {
+  width: 100%;
+  height: 100%;
+
+}
+
+.map_frame path {
+  opacity: 0.5;
+}
+
+.label_frame {
+  position: absolute;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.label_frame .region_label {
+ font-size:  1rem;
+}
+
+.label_frame.wil {
+  top: 14%;
+  left: 37%;
+}
+
+.label_frame.toggenburg {
+  top: 31%;
+  left: 30%;
+}
+
+.label_frame.see-gaster {
+  top: 42%;
+  left: 20%;
+}
+
+.label_frame.sarganserland {
+  top: 77%;
+  left: 57%;
+}
+
+.label_frame.werdenberg {
+  top: 52%;
+  left: 64%;
+}
+
+.label_frame.rheintal {
+  top: 22%;
+  left: 83%;
+}
+
+.label_frame.rorschach {
+    top: 10.5%;
+    left: 72%;
+}
+
+.label_frame.st-gallen {
+    top: 14.5%;
+    left: 56%;
+}
+
+
+.map_scale {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  max-width: 388px;
+  border: 1px solid var(--gray-8);
+  margin-top: 1.5rem;
+
+  position: relative;
+}
+
+.map_scale:after {
+  background: linear-gradient(90deg, var(--yes-9), var(--no-9));
+  width: 100%;
+  height: 100%;
+  opacity: 0..5;
+  content: "";
+  position: absolute;  
+  top: 0;
+  left: 0;
+}
+
+.map_scale span {
+  transform: translateY(-1.5rem);
+
+}
+
+.recharts-legend-item-text {
+  color: var(--gray-12) !important;
+}
+
+.interact path {
+  transition: opacity 0.5s;
+}
+
+.interact path:hover {
+  opacity: 1;
+}

@@ -1,0 +1,70 @@
+{
+  "PLACEHOLDER_KEYWORD": "{{keyword}}",
+  "search": {
+    "root": {
+      "h1": "Medienmitteilungen nach Stichworten finden",
+      "title": "Medienmitteilungen Stichwortsuche",
+      "metaDescription": "Medienmitteilungen, Polizeiberichte und Vernehmlassungen von Kanton und Stadtverwaltung St.Gallen nach Stichworten durchsuchen."
+    },
+    "searchTermAllCats": {
+      "h1": "Medienmitteilungen zum Stichwort \"{{keyword}}\"",
+      "title": "Medienmitteilungen aller Kategorien zum Thema \"{{keyword}}\"",
+      "metaDescription": "Medienmitteilungen, Polizeiberichte und Vermehmlassungen von Stadt und Kanton St.Gallen zum Suchbegriff \"{{keyword}}\""
+    }
+  },
+  "home": {
+    "h1": "Medienmitteilungen der Stadtverwaltung und des Kantons St.Gallen",
+    "title": "Medienmitteilungen St.Gallen",
+    "metaDescription": "Open Data Portal für Stadt und Kanton St.Gallen mit Medienmitteilungen der Stadtverwaltung, Polizei sowie Geschäfte, Abstimmungen, Gremien und Personen des Kantonsrates."
+  },
+  "impressum": {
+    "h1": "Über OpenData St.Gallen",
+    "title": "Impressum des Projekts OpenData St.Gallen",
+    "metaDescription": "OpenData St.Gallen ist ein Open Source und Open Data Projekt, das News und Daten aus St.Gallen frei verfügbar macht."
+  },
+  "kantonsrat_main": {
+    "h1": "Abstimmungen, Personen, Gremien und Geschäfte des Kantonsrates St.Gallen",
+    "title": "Kantonsrat | Stichwortsuche",
+    "metaDescription": "Open Data Portal mit Informationen des Kantonsrates St.Gallen. Finden Sie Daten zu Abstimmungen, Personen, Gremien und Geschäften nach Stichworten."
+  },
+  "kantonsrat_abstimmungen_feed": {
+    "h1": "Abstimmungen Kantonsrat St.Gallen",
+    "title": "Kantonsrat | Abstimmungen",
+    "metaDescription": "Wie entscheidet sich der Kantonsrat? Sehen Sie die Auflistung der Abstimmungen des Kantonsrates St.Gallen und suchen sie Abstimmungen nach Stichworten."
+  },
+  "kantonsrat_abstimmungen_feed_search": {
+    "h1": "Abstimmungen Kantonsrat St.Gallen zum Thema \"{{keyword}}\"",
+    "title": "Kantonsrat | Abstimmungen zum Thema \"{{keyword}}\"",
+    "metaDescription": "Aktuelle und vergangene Abstimmungen des Kantonsrates St.Gallen zum Thema \"{{keyword}}\". Informieren Sie sich über die Arbeit des Kantonsrates."
+  },
+  "kantonsrat_geschaefte_feed": {
+    "h1": "Geschäfte Kantonsrat",
+    "title": "Kantonsrat | Geschäfte",
+    "metaDescription": "Welche Geschäfte bearbeitet der Kantonsrat St.Gallen? Verschaffen Sie sich einen Überblick über die Geschäfte des Kantonsrates und finden Sie Geschäfte nach Stichworten."
+  },
+  "kantonsrat_geschaefte_feed_search": {
+    "h1": "Geschäfte Kantonsrat zum Thema \"{{keyword}}\"",
+    "title": "Kantonsrat | Geschäfte zum Thema \"{{keyword}}\"",
+    "metaDescription": "Welche Geschäfte zum Thema \"{{keyword}}\" bearbeitet der Kantonsrat? Verschaffen Sie sich einen Überblick über die Geschäfte des Kantonsrates St.Gallen."
+  },
+  "kantonsrat_personen_feed": {
+    "h1": "Personen in Verbindung mit dem Kantsonsrat",
+    "title": "Kantonsrat | Personen",
+    "metaDescription": "Wer ist im Kantonsrat St.Gallen? Hier finden Sie Informationen zu aktuellen und ehemaligen Kantonsräten, deren Zugehörigkeiten und Aktiviäten."
+  },
+  "kantonsrat_personen_feed_search": {
+    "h1": "Kantonsräte mit dem Namen \"{{keyword}}\"",
+    "title": "Kantonsrat | Personen mit dem Namen \"{{keyword}}\" ",
+    "metaDescription": "Kantonsräte mit dem Namen \"{{keyword}}\". Informieren Sie sich über aktuelle und ehemalige Räte des Kantonsrates St.Gallen, deren Kontaktdaten, Aktivitäten und Mitgliedschaften."
+  },
+  "kantonsrat_gremien_feed": {
+    "h1": "Gremien Kantonsrat",
+    "title": "Kantonsrat | Gremien",
+    "metaDescription": "Welche Parteien, Kommissionen und andere Gremien in Verbindung mit dem Kantonsrat St.Gallen gibt es? Suchen Sie nach aktuellen und vergangenen Gremien."
+  },
+  "kantonsrat_gremien_feed_search": {
+    "h1": "Gremien Kantonsrat zum Stichwort \"{{keyword}}\"",
+    "title": "Kantonsrat | Gremien zum Thema \"{{keyword}}\"",
+    "metaDescription": "Parteien, Kommissionen, Gruppen und andere Gremien zum Thema \"{{keyword}}\". Informieren Sie sich über Gruppen in Verbindung mit dem Kantonsrat St.Gallen."
+  }
+}

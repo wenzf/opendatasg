@@ -1,0 +1,20 @@
+.cat_link {
+  text-decoration: none;
+  display: inline-flex;
+  padding: 0.125rem;
+  justify-content: center;
+  width: 100%;
+  border: 3px solid transparent;
+  color: var(--gray-12);
+  background-color: var(--gray-3);
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
+
+.cat_link:hover {
+  background-color: var(--gray-4);
+}
+
+.cat_link:focus {
+  border: 3px solid var(--gray-12);
+}

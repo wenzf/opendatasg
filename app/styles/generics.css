@@ -1,0 +1,131 @@
+.btn3,
+.btn1,
+.inp1,
+.btn2,
+.inp2 {
+  height: 44px;
+  padding: 3px;
+  font-size: 1rem;
+  min-width: 44px;
+
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inp1 {
+  max-width: 9rem;
+}
+
+.btn3,
+.btn1,
+.inp1 {
+  color: var(--gray-12);
+  background-color: var(--gray-3);
+}
+
+.btn2,
+.inp2 {
+  color: var(--gray-11);
+  background-color: transparent;
+}
+
+
+
+.inp2,
+.inp1 {
+  box-shadow: inset 0px -1px 0px 0px var(--gray-8);
+}
+
+.btn3,
+.btn2 {
+  border-radius: 3px;
+}
+
+.react-share__ShareButton:hover,
+.btn3:hover,
+.btn2:hover,
+.inp2:hover,
+.btn1:hover,
+.inp1:hover {
+  background-color: var(--gray-4);
+}
+
+.btn1 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 512px) {
+  .inp1 {
+    max-width: 11rem;
+  }
+}
+
+.btn3:focus,
+.btn2:focus,
+.inp2:focus,
+.btn1:focus,
+.inp1:focus {
+  background-color: var(--green-2);
+  color: var(--green-12);
+  outline: none;
+  box-shadow: 0px 0px 0px 2px var(--gray-10);
+}
+
+.bg_img svg {
+  color: var(--green-12);
+  transform: scale(1.2, 1.05);
+}
+
+.bg_img svg path {
+  stroke: var(--green-9);
+  stroke-width: 5px;
+}
+
+footer a,
+.article_source_block a {
+  color: var(--green-11);
+  text-decoration: none;
+  display: inline-flex;
+  min-height: 33px;
+}
+
+footer a {
+  color: var(--gray-12);
+  align-items: flex-end;
+}
+
+.pagination .links a:hover {
+  background-color: var(--gray-4);
+}
+
+.pagination .links a:hover,
+footer a:hover,
+.article_source_block a:hover {
+  color: var(--green-12);
+  text-decoration: underline;
+}
+
+.pagination .links a:focus,
+.footer a:focus,
+.article_source_block a:focus {
+  box-shadow: inset 0px 0px 0px 2px var(--gray-10);
+  outline: none;
+}
+
+.search_2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--gray-2);
+  padding: 0.5rem;
+  border: 1px solid var(--gray-4);
+  max-width: 100%;
+  font-weight: 700;
+}
+
+

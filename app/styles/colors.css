@@ -1,0 +1,198 @@
+:root {
+  --green-1: #fafefb;
+  --green-2: #f4fbf5;
+  --green-3: #e6f7e8;
+
+  --green-9: #008334;
+  --green-10: #007526;
+  --green-11: #008132;
+  --green-12: #1b3d22;
+
+  --gray-1: #fcfcfd;
+  --gray-2: #f9f9fb;
+  --gray-3: #eff0f3;
+  --gray-4: #e7e8ec;
+  --gray-5: #e0e1e6;
+  --gray-6: #d8d9e0;
+  --gray-7: #cdced7;
+  --gray-8: #b9bbc6;
+  --gray-9: #8b8d98;
+  --gray-10: #80828d;
+  --gray-11: #62636c;
+  --gray-12: #1e1f24;
+
+  --orange-11: #cc4e00;
+  --orange-12: #582d1d;
+
+  --no-9: #ee363c;
+  --yes-9: #0090ff;
+  --none-9: #6e6e6e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gray-1: #111113;
+    --gray-2: #19191b;
+    --gray-3: #222325;
+    --gray-4: #292a2e;
+    --gray-5: #303136;
+    --gray-6: #393a40;
+    --gray-7: #46484f;
+    --gray-8: #5f606a;
+    --gray-9: #6c6e79;
+    --gray-10: #797b86;
+    --gray-11: #b2b3bd;
+    --gray-12: #eeeef0;
+
+    --green-1: #0a140c;
+    --green-2: #111b12;
+    --green-3: #142c18;
+
+    --green-9: #008334;
+    --green-10: #127231;
+    --green-11: #6ad27e;
+    --green-12: #a8f8b4;
+
+    --orange-11: #ffa057;
+    --orange-12: #ffe0c2;
+  }
+
+  @supports (color: color(display-p3 1 1 1)) {
+    @media (color-gamut: p3) {
+      :root {
+        --green-1: oklch(17.8% 0.022 148.4);
+        --green-2: oklch(20.9% 0.022 148.4);
+        --green-3: oklch(26.6% 0.047 148.4);
+
+        --green-9: oklch(53.2% 0.152 148.4);
+        --green-10: oklch(48.5% 0.131 148.4);
+        --green-11: oklch(78% 0.152 148.4);
+        --green-12: oklch(91.1% 0.122 148.4);
+
+        --gray-1: oklch(17.8% 0.004 277.7);
+        --gray-2: oklch(21.5% 0.004 277.7);
+        --gray-3: oklch(25.5% 0.005 277.7);
+        --gray-4: oklch(28.4% 0.008 277.7);
+        --gray-5: oklch(31.4% 0.009 277.7);
+        --gray-6: oklch(35% 0.01 277.7);
+        --gray-7: oklch(40.2% 0.012 277.7);
+        --gray-8: oklch(49.2% 0.016 277.7);
+        --gray-9: oklch(54% 0.017 277.7);
+        --gray-10: oklch(58.6% 0.016 277.7);
+        --gray-11: oklch(77% 0.014 277.7);
+        --gray-12: oklch(94.9% 0.003 277.7);
+      }
+    }
+  }
+}
+
+.light {
+  --green-1: #fafefb;
+  --green-2: #f4fbf5;
+  --green-3: #e6f7e8;
+
+  --green-9: #008334;
+  --green-10: #007526;
+  --green-11: #008132;
+  --green-12: #1b3d22;
+
+  --gray-1: #fcfcfd;
+  --gray-2: #f9f9fb;
+  --gray-3: #eff0f3;
+  --gray-4: #e7e8ec;
+  --gray-5: #e0e1e6;
+  --gray-6: #d8d9e0;
+  --gray-7: #cdced7;
+  --gray-8: #b9bbc6;
+  --gray-9: #8b8d98;
+  --gray-10: #80828d;
+  --gray-11: #62636c;
+  --gray-12: #1e1f24;
+
+  --orange-11: #cc4e00;
+  --orange-12: #582d1d;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    .light {
+      --green-1: oklch(99.4% 0.006 148.4);
+      --green-2: oklch(98.2% 0.011 148.4);
+      --green-3: oklch(96.1% 0.027 148.4);
+
+      --green-9: oklch(53.2% 0.152 148.4);
+      --green-10: oklch(48.5% 0.152 148.4);
+
+      --green-11: oklch(52.7% 0.152 148.4);
+      --green-12: oklch(32.6% 0.062 148.4);
+
+      --gray-1: oklch(99.1% 0.001 277.7);
+      --gray-2: oklch(98.2% 0.003 277.7);
+      --gray-3: oklch(95.6% 0.005 277.7);
+      --gray-4: oklch(93.1% 0.006 277.7);
+      --gray-5: oklch(91% 0.008 277.7);
+      --gray-6: oklch(88.8% 0.009 277.7);
+      --gray-7: oklch(85.3% 0.012 277.7);
+      --gray-8: oklch(79.4% 0.016 277.7);
+      --gray-9: oklch(64.6% 0.016 277.7);
+      --gray-10: oklch(61% 0.016 277.7);
+      --gray-11: oklch(50.3% 0.014 277.7);
+      --gray-12: oklch(24.1% 0.01 277.7);
+    }
+  }
+}
+
+.dark {
+  --gray-1: #111113;
+  --gray-2: #19191b;
+  --gray-3: #222325;
+  --gray-4: #292a2e;
+  --gray-5: #303136;
+  --gray-6: #393a40;
+  --gray-7: #46484f;
+  --gray-8: #5f606a;
+  --gray-9: #6c6e79;
+  --gray-10: #797b86;
+  --gray-11: #b2b3bd;
+  --gray-12: #eeeef0;
+
+  --green-1: #0a140c;
+  --green-2: #111b12;
+  --green-3: #142c18;
+
+  --green-9: #008334;
+  --green-10: #127231;
+  --green-11: #6ad27e;
+  --green-12: #a8f8b4;
+
+  --orange-11: #ffa057;
+  --orange-12: #ffe0c2;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    .dark {
+      --green-1: oklch(17.8% 0.022 148.4);
+      --green-2: oklch(20.9% 0.022 148.4);
+      --green-3: oklch(26.6% 0.047 148.4);
+
+      --green-9: oklch(53.2% 0.152 148.4);
+      --green-10: oklch(48.5% 0.131 148.4);
+      --green-11: oklch(78% 0.152 148.4);
+      --green-12: oklch(91.1% 0.122 148.4);
+
+      --gray-1: oklch(17.8% 0.004 277.7);
+      --gray-2: oklch(21.5% 0.004 277.7);
+      --gray-3: oklch(25.5% 0.005 277.7);
+      --gray-4: oklch(28.4% 0.008 277.7);
+      --gray-5: oklch(31.4% 0.009 277.7);
+      --gray-6: oklch(35% 0.01 277.7);
+      --gray-7: oklch(40.2% 0.012 277.7);
+      --gray-8: oklch(49.2% 0.016 277.7);
+      --gray-9: oklch(54% 0.017 277.7);
+      --gray-10: oklch(58.6% 0.016 277.7);
+      --gray-11: oklch(77% 0.014 277.7);
+      --gray-12: oklch(94.9% 0.003 277.7);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+a.pending:focus,
+a.cat_link.pending:focus {
+  position: relative;
+  overflow: hidden;
+  color: var(--gray-12);
+}
+
+a.pending:focus:after,
+a.cat_link.pending:focus:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(60deg, var(--gray-2), transparent);
+  transform: translate(0, 0);
+  animation: pending_link 2s ease infinite;
+}
+
+@keyframes pending_link {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(100%, 0);
+  }
+}
