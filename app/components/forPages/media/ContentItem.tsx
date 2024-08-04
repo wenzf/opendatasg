@@ -40,7 +40,6 @@ export default function ContentItem({ contentItem }: {
     const { DOMAIN_NAME } = PUBLIC_CONFIG
     const url = DOMAIN_NAME + canonical
 
-
     let contentSource = ''
     let contentSourceURL = ''
     let contentSourceAPIURL = ''

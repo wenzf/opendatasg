@@ -49,16 +49,16 @@ export const loader: LoaderFunction = async ({ params }) => {
         const [feedGeschaeft, dokumente, beteiligungen, feedAbstimmungen] = allResponses;
         const groups = await dataAPIRatstinfoGroups([feedGeschaeft], [
             ['committee_id'],
-             ['responsible_id']])
+            ['responsible_id']])
 
         if (feedGeschaeft) {
-            const item = { ...feedGeschaeft, dokumente, beteiligungen, abstimmungen: feedAbstimmungen.results, groups }
+            const item = { ...feedGeschaeft, dokumente, beteiligungen, abstimmungen: feedAbstimmungen, groups }
             return json({ item })
         } else {
             return json({ item: null })
         }
     } catch {
-        return json(null, {status: 404})
+        return json(null, { status: 404 })
     }
 }
 

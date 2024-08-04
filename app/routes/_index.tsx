@@ -61,7 +61,6 @@ export default function Index() {
   const loaderData = useLoaderData<typeof loader>()
   const feed = prettyFeed(loaderData?.feed)
   const isBot = loaderData?.isBot
- // console.log(loaderData?.idx, loaderData?.feed)
   const { metasAndTitles: { home: { h1 } } } = texts
 
   /**

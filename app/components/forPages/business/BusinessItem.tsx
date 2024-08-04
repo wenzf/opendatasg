@@ -2,6 +2,8 @@
 import { Link, NavLink } from "@remix-run/react";
 import { PUBLIC_CONFIG } from "~/config";
 import { ratsinfo_business_types, ratsinfo_topics } from "~/resources/api_statics/ratsInfo_api_statics";
+import CheckIconSVG from "~/resources/icons/CheckIconSVG";
+import Cross2IconSVG from "~/resources/icons/Cross2IconSVG";
 import texts from "~/texts";
 // import { APIRatsinfoBusinessesExtended } from "~/types";
 import { APIRatsinfoBusinessFull } from "~/types/ratsinfoAPI";
@@ -12,11 +14,12 @@ import { formatDateShort } from "~/utils/time";
 export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }) {
     const { labels: {
         geschaeft: { federfuehrung, geschaeft_uebersicht, dokumente, publiziert, datei,
-            beteiligungen, abstimmungen, sitzungs_titel, abstimmungs_gegenstand,
-            geschaefts_titel, abstimmungs_ergebnisse },
+            beteiligungen, abstimmungen,
+        },
         generics: { thema, wortlaut, statements, session, person, gremium,
             akteur, yes, no, vertraulich, oeffentlich, dringend, datum, geschaeft,
-            eroeffnung, abschluss, komitee, nummer, title, typ, art, letzte_aenderung }
+            eroeffnung, abschluss, komitee, nummer, title, typ, art, letzte_aenderung },
+        abstimmung: { absent_enthaltung }
     } } = texts;
 
     const { RATSINFO_ROOT, ROUTE_FRAGMENTS: {
@@ -118,7 +121,7 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
             {item.beteiligungen?.length ? (
                 <section className="a_sec">
                     <div className="a_sub_sec">
-                        <table className="t_1" width="100%">
+                        <table className="t_1 la" width="100%">
                             <caption>{beteiligungen}</caption>
                             <thead>
                                 <tr>
@@ -161,25 +164,38 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
             {item.abstimmungen?.length ? (
                 <section className="a_sec">
                     <div className="a_sub_sec">
-                        <table className="t_1">
+                        <table className="t_1 la" width="100%">
                             <caption>{abstimmungen}</caption>
                             <thead>
                                 <tr>
-                                    <th>{datum}</th>
-                                    <th>{abstimmungs_gegenstand}</th>
-                                    <th>{sitzungs_titel}</th>
-                                    <th>{geschaefts_titel}</th>
-                                    <th>{abstimmungs_ergebnisse}</th>
+                                    <th rowSpan={2}>{datum}</th>
+                                    <th rowSpan={2}>{title}</th>
+                                    <th colSpan={5}>Resultat</th>
+                                    <th rowSpan={2}>{oeffentlich}</th>
+                                </tr>
+                                <tr>
+                                    <th>{yes}</th>
+                                    <th>Bedeutung</th>
+                                    <th>{no}</th>
+                                    <th>Bedeutung</th>
+                                    <th>{absent_enthaltung}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {item.abstimmungen.map((it, ind) => (
                                     <tr key={ind}>
-                                        <td>{formatDateShort(it.abstimmungsdatum)}</td>
-                                        <td>{it.abstimmungsgegenstand}</td>
-                                        <td>{it.sitzungstitel}</td>
-                                        <td>{it.geschaftstitel}</td>
-                                        <th><NavLink to={`/${KANTONSRAT}/${ABSTIMMUNG}/id/${it.abstimmungs_id}`}>{abstimmungs_ergebnisse}</NavLink></th>
+                                        <td>{formatDateShort(it.date)}</td>
+                                        <td>
+                                            <NavLink to={`/${KANTONSRAT}/${ABSTIMMUNG}/id/${it.id}`}>
+                                                {it.title}
+                                            </NavLink>
+                                        </td>
+                                        <td>{it.results.yes}</td>
+                                        <td>{it.meaning_of_yes}</td>
+                                        <td>{it.results.no}</td>
+                                        <td>{it.meaning_of_no}</td>
+                                        <td>{it.results.absent + it.results.abstention}</td>
+                                        <td>{it.is_public ? <CheckIconSVG width={24} height={24} aria-label="ja" /> : <Cross2IconSVG width={24} height={24} aria-label="nein" />}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -191,7 +207,7 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
             {item?.statements?.length ? (
                 <section className="a_sec">
                     <div className="a_sub_sec">
-                        <table className="t_1" width="100%">
+                        <table className="t_1 la" width="100%">
                             <caption>{statements}</caption>
                             <thead className="t_sticky_header">
                                 <tr>

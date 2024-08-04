@@ -7,7 +7,6 @@ export default function SearchKantonsrat({ basePath, label, className }: {
     label: string
     className: string
 }) {
-
     const navigate = useNavigate();
     const inputRef = useRef<HTMLInputElement>(null)
 

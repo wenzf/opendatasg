@@ -37,8 +37,6 @@ export default function ScrollToTopButton() {
         }
     }, [])
 
-
-
     return (
         <div className={`scroll_up_btn${show ? ' show_btn' : ''}`}>
             <button disabled={!show} aria-disabled={!show} className="btn3" onClick={() => doScrollUp()}>

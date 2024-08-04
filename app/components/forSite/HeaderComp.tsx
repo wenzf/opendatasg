@@ -20,7 +20,6 @@ type HeaderCompProps = {
  */
 export const HeaderComp = ({ themeSetter, theme, prefsDarkmode }:
     HeaderCompProps
-
 ) => {
     const page = usePathHandle()
 

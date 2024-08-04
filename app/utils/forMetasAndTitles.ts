@@ -96,31 +96,31 @@ export const textAndMetasForFeedRoutesByParams = (params: Params) => {
 
     if (section === KANTON) {
         if (category === MITTEILUNGEN) {
-            title = `Medienmitteilungen Kanton St. Gallen${seite}`
-            h1 = `Medienmitteilungen Kanton St. Gallen${seite}`
-            metaDescription = `News aus dem Kanton St. Gallen: Newsfeed mit Medienmitteilungen des Kantons St. Gallen im Überblick${seite}`
+            title = `Medienmitteilungen Kanton St.Gallen${seite}`
+            h1 = `Medienmitteilungen Kanton St.Gallen${seite}`
+            metaDescription = `News aus dem Kanton St.Gallen: Newsfeed mit Medienmitteilungen des Kantons St.Gallen im Überblick${seite}`
         } else if (category === VERNEHMLASSUNGEN) {
-            title = `Vernehmlassungen Kanton St. Gallen${seite}`
-            h1 = `Vernehmlassungen Kanton St. Gallen${seite}`
-            metaDescription = `News aus dem Kanton St. Gallen: Newsfeed mit Vernehmlassungen des Kantons St. Gallen im Überblick${seite}`
+            title = `Vernehmlassungen Kanton St.Gallen${seite}`
+            h1 = `Vernehmlassungen Kanton St.Gallen${seite}`
+            metaDescription = `News aus dem Kanton St.Gallen: Newsfeed mit Vernehmlassungen des Kantons St.Gallen im Überblick${seite}`
         } else if (!category) {
-            title = `Medienmitteilungen und Vernehmlassungen des Kantons St. Gallen${seite}`
-            h1 = `Medienmitteilungen und Vernehmlassungen des Kantons St. Gallen${seite}`
-            metaDescription = `News aus Stadt und Kanton St. Gallen: Newsfeed mit Vernehmlassungen und Medienmitteilungen des Kantons St. Gallen im Überblick${seite}`
+            title = `Medienmitteilungen und Vernehmlassungen des Kantons St.Gallen${seite}`
+            h1 = `Medienmitteilungen und Vernehmlassungen des Kantons St.Gallen${seite}`
+            metaDescription = `News aus Stadt und Kanton St.Gallen: Newsfeed mit Vernehmlassungen und Medienmitteilungen des Kantons St.Gallen im Überblick${seite}`
         }
     } else if (section === STADT) {
         if (category === POLIZEI) {
-            title = `Mitteilungen der Stadtpolizei St. Gallen${seite}`
-            h1 = `Mitteilungen der Stadtpolizei St. Gallen${seite}`
-            metaDescription = `News aus der Stadt St. Gallen: Newsfeed mit Medienmitteilungen des Polizei St. Gallen im Überblick${seite}`
+            title = `Mitteilungen der Stadtpolizei St.Gallen${seite}`
+            h1 = `Mitteilungen der Stadtpolizei St.Gallen${seite}`
+            metaDescription = `News aus der Stadt St.Gallen: Newsfeed mit Medienmitteilungen des Polizei St.Gallen im Überblick${seite}`
         } else if (category === MITTEILUNGEN) {
-            title = `Medienmitteilungen der Stadt St. Gallen${seite}`
-            h1 = `Medienmitteilungen der Stadt St. Gallen${seite}`
-            metaDescription = `News aus der Stadt St. Gallen: Newsfeed mit Medienmitteilungen der Stadt St. Gallen im Überblick${seite}`
+            title = `Medienmitteilungen der Stadt St.Gallen${seite}`
+            h1 = `Medienmitteilungen der Stadt St.Gallen${seite}`
+            metaDescription = `News aus der Stadt St.Gallen: Newsfeed mit Medienmitteilungen der Stadt St.Gallen im Überblick${seite}`
         } else if (!category) {
-            title = `Mitteilungen der Stadt und Polizei St. Gallen${seite}`
-            h1 = `Mitteilungen der Stadt und Polizei St. Gallen${seite}`
-            metaDescription = `News aus der Stadt St. Gallen: Newsfeed mit Medienmitteilungen der Polizei und Stadt St. Gallen im Überblick${seite}`
+            title = `Mitteilungen der Stadt und Polizei St.Gallen${seite}`
+            h1 = `Mitteilungen der Stadt und Polizei St.Gallen${seite}`
+            metaDescription = `News aus der Stadt St.Gallen: Newsfeed mit Medienmitteilungen der Polizei und Stadt St.Gallen im Überblick${seite}`
         }
     }
 

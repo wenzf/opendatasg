@@ -72,6 +72,14 @@ export default function App() {
         <FooterComp />
         <ScrollRestoration nonce={cspNonce} />
         <Scripts nonce={cspNonce} />
+        <span>
+          <meta itemProp="url" content={rootURL} />
+          <meta itemProp="name" content="OpenData St.Gallen" />
+          <meta itemProp="inLanguage" content="de" />
+          <meta itemProp="alternateName" content="ODSG" />
+          <meta itemProp="description" content="Open Data Portal für den Kanton St.Gallen" />
+          <meta itemProp="keywords" content="St.Gallen, Open Data, Open Government, Schweiz, Kantonsrat, Medienmitteilungen, Polizeimeldungen, Vernehmlassungen" />
+        </span>
       </body>
     </html>
   );

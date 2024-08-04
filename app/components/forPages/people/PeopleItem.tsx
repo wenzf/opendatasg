@@ -109,7 +109,7 @@ export default function PeopleItem({ item }: { item: APIRatsinfoPeopleFull }) {
                                     <th>{item.private_address.type_display ? item.private_address.type_display : 'Anschrift'}</th>
                                     <td>
                                         {item.private_address.street ? (<div itemProp="streetAddress">{item.private_address.street}</div>) : null}
-                                        {item.private_address.zip_code || item.private_address.city ? (<div>{item.private_address.zip_code ? <span itemProp="postalCode">{item.private_address.zip_code}</span> : ''}<span itemProp="addressLocality">{item.private_address.city}</span></div>) : null}
+                                        {item.private_address.zip_code || item.private_address.city ? (<div>{item.private_address.zip_code ? <span itemProp="postalCode">{`${item.private_address.zip_code} `}</span> : ''}<span itemProp="addressLocality">{item.private_address.city}</span></div>) : null}
                                     </td>
                                 </tr>
                             ) : null}

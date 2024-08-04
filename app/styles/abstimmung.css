@@ -92,8 +92,10 @@
 .t_1 th {
   text-align: left;
   font-weight: 400;
+}
+
+.t_1 thead th {
   border-right: 2px solid var(--gray-1);
-  background-color: var(--gray-2);
 }
 
 .t_sticky_header {
@@ -121,7 +123,7 @@
 }
 */
 
-.t_1.la tr:hover {
+.t_1.la tbody tr:hover {
   background: var(--gray-3);
   box-shadow: inset 0 -3px 8px var(--gray-5);
 }
@@ -305,3 +307,9 @@
 .no_res:hover {
   background-color: var(--gray-2);
 }
+
+.sha,
+.cg_sha {
+  background: var(--gray-3);
+}
+

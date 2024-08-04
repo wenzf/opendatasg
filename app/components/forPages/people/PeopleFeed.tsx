@@ -8,7 +8,6 @@ import { metasAndTitlesForRatsinfoFeedRoutes } from "~/utils/forMetasAndTitles";
 
 
 export default function PeopleFeed({ feed, count }: { feed: APIRatsinfoPeopleBase[], count: number }) {
-
     const params = useParams()
     const [searchParams] = useSearchParams()
 

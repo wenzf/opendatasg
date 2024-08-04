@@ -16,7 +16,6 @@ export const handle = {
 
 
 export const meta: MetaFunction<typeof loader> = ({ location, data, params }) => {
-
     const { DOMAIN_NAME, DEFAULT_OG_IMAGE, ROUTE_FRAGMENTS: { SEARCH_PARAM_FRAGMENT } } = PUBLIC_CONFIG
     const { metasAndTitles: { kantonsrat_abstimmungen_feed,
         kantonsrat_abstimmungen_feed_search } } = texts

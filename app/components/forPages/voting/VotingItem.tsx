@@ -143,7 +143,8 @@ export default function VotingItem({
 
     return (
         <main className="a_main sp" itemScope itemType="https://schema.org/Event">
-            <h1 className="a_h1" itemProp="name">{item.title}: {item.business.title}</h1>
+
+            <h1 className="a_h1">{item.title}: {item.business.title}</h1>
 
             <section className="a_sec">
                 <div className="a_sub_sec">
@@ -213,6 +214,7 @@ export default function VotingItem({
                 </div>
                 <div className="a_sub_sec" style={{ overflowX: 'unset', minWidth: '41%' }}>
                     <table width="100%" className="t_1">
+
                         <caption>{ergebnis}</caption>
                         <tbody >
                             <tr>
@@ -272,6 +274,10 @@ export default function VotingItem({
             <section className="a_sec">
                 <div className="a_sub_sec">
                     <table width="100%" className="t_1 la">
+                        <colgroup />
+                        <colgroup span={2} className="cg_sha" />
+                        <colgroup span={2} />
+                        <colgroup span={2} className="cg_sha" />
                         <caption><span>Abstimmungsergebnis nach Wahlkreisen</span></caption>
                         <thead>
                             <tr>
@@ -318,21 +324,25 @@ export default function VotingItem({
 
             <section className="a_sec">
                 <div className="a_sub_sec">
-                    <table width="100%" className="t_1">
+                    <table width="100%" className="t_1 la">
+                        <colgroup />
+                        <colgroup span={2} className="cg_sha" />
+                        <colgroup span={2} />
+                        <colgroup span={2} className="cg_sha" />
                         <caption><span>Abstimmungsergebnis nach Parteien</span></caption>
                         <thead>
                             <tr>
                                 <th rowSpan={2}>
                                     {partei}
                                 </th>
-                                <th colSpan={2}>{yes}</th>
+                                <th className="sha" colSpan={2}>{yes}</th>
                                 <th colSpan={2}>{no}</th>
                                 <th colSpan={2}>{absent_enthaltung}</th>
                                 <th rowSpan={2}>{total}</th>
                             </tr>
                             <tr>
-                                <th>{anzahl}</th>
-                                <th>{anteil}</th>
+                                <th className="sha">{anzahl}</th>
+                                <th className="sha">{anteil}</th>
                                 <th>{anzahl}</th>
                                 <th>{anteil}</th>
                                 <th>{anzahl}</th>
@@ -372,23 +382,27 @@ export default function VotingItem({
             <section className="a_sec" >
                 <div className="a_sub_sec" style={{ maxHeight: '75vh', overflow: 'auto' }}>
 
-                    <table width="100%" className="t_1">
+                    <table width="100%" className="t_1 la">
+                        <colgroup />
+                        <colgroup span={2} className="cg_sha" />
+                        <colgroup span={2} />
+                        <colgroup span={2} className="cg_sha" />
                         <caption><span>Abstimmungsergebnis nach Gemeinde und Stadt</span></caption>
                         <thead className="t_sticky_header">
                             <tr>
                                 <th rowSpan={2}>{gemeinde}</th>
-                                <th colSpan={2}>{yes}</th>
+                                <th className="sha" colSpan={2}>{yes}</th>
                                 <th colSpan={2}>{no}</th>
-                                <th colSpan={2}>{absent_enthaltung}</th>
+                                <th className="sha" colSpan={2}>{absent_enthaltung}</th>
                                 <th rowSpan={2}>{total}</th>
                             </tr>
                             <tr>
+                                <th className="sha">{anzahl}</th>
+                                <th className="sha">{anteil}</th>
                                 <th>{anzahl}</th>
                                 <th>{anteil}</th>
-                                <th>{anzahl}</th>
-                                <th>{anteil}</th>
-                                <th>{anzahl}</th>
-                                <th>{anteil}</th>
+                                <th className="sha">{anzahl}</th>
+                                <th className="sha">{anteil}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -412,7 +426,7 @@ export default function VotingItem({
 
             <section className="a_sec" >
                 <div className="a_sub_sec" style={{ maxHeight: '75vh', overflow: 'auto' }}>
-                    <table width="100%" className="t_1">
+                    <table width="100%" className="t_1 la">
                         <caption>{einzelstimmen}</caption>
                         <thead className="t_sticky_header">
                             <tr>
@@ -454,7 +468,30 @@ export default function VotingItem({
                     </table>
                 </div>
             </section>
-
+            <meta itemProp="name" content={`${item.title} (Abstimmung)`} />
+            <meta itemProp="description" content={item.business.title} />
+            <span itemProp="location" itemScope itemType="https://schema.org/Place">
+                <meta itemProp="name" content="Kantonsrat St.Gallen" />
+                <span itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                    <meta itemProp="streetAddress" content="Klosterhof 3" />
+                    <meta itemProp="postalCode" content="9000" />
+                    <meta itemProp="addressLocality" content="St.Gallen" />
+                    <meta itemProp="alternateName" content="Neue Pfalz" />
+                    <meta itemProp="addressCountry" content="CH" />
+                    <meta itemProp="name" content="Kantonsrat St.Gallen" />
+                </span>
+            </span>
+            <span itemProp="organizer" itemScope itemType="https://schema.org/GovernmentOrganization">
+                <meta itemProp="name" content="Kantonsrat St.Gallen" />
+                <link itemProp="url" href="https://sg.ch" />
+                <span itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                    <meta itemProp="streetAddress" content="Klosterhof 3" />
+                    <meta itemProp="postalCode" content="9000" />
+                    <meta itemProp="addressLocality" content="St.Gallen" />
+                    <meta itemProp="alternateName" content="Neue Pfalz" />
+                    <meta itemProp="addressCountry" content="CH" />
+                </span>
+            </span>
         </main>
     )
 }

@@ -84,7 +84,8 @@ export interface APIRatsinfoBusinessBase {
 export interface APIRatsinfoBusinessFull extends APIRatsinfoBusinessBase {
     dokumente: APIRatsinfoGeschaeftResultDokumente[]
     beteiligungen: APIRatsinfoGeschaeftBeteiligungen[]
-    abstimmungen: APIRatsinfoAbstimmungenResult[]
+    abstimmungen: APIRatsinfoVotingBase[]
+   /// abstimmungen: APIRatsinfoAbstimmungenResult[]
     is_public: boolean
     groups: Record<string, APIRatsinfoGroupBase>
     statements: APIRatsInfoBusinessStatement[]
@@ -268,12 +269,13 @@ export interface BallotModified extends Ballot {
     person_name: string
 }
 
-export interface APIRatsinfoVotingFull {
+export interface APIRatsinfoVotingBase {
     id: number
     title: string
     agenda_item_id: number
     date: string
     created: string
+
     meaning_of_yes: string
     meaning_of_no: string
     results: {
@@ -283,6 +285,10 @@ export interface APIRatsinfoVotingFull {
         absent: number
     },
     result_string: string
+    is_public: boolean
+}
+
+export interface APIRatsinfoVotingFull extends APIRatsinfoVotingBase {
     ballots: Ballot[] | BallotModified[]
     business: {
         id: number
@@ -294,10 +300,9 @@ export interface APIRatsinfoVotingFull {
         type_id: number
         gever_dossier_url: string
         assignee_id: null | string | number
-    },
-    is_public: boolean
+    }
 }
-
+/*
 export interface APIRatsinfoAbstimmungenResult {
     abstimmungs_id: string
     abstimmungsgegenstand: string
@@ -311,3 +316,5 @@ export interface APIRatsinfoAbstimmungenResult {
     abstimmungsdatum: string
     link_zu_abstimmungsergebnissen: string
 }
+
+*/

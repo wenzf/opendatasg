@@ -32,14 +32,6 @@ export default function FooterComp() {
                 </div>
             ) : null}
             <ScrollToTopButton />
-            <span>
-                <meta itemProp="url" content={DOMAIN_NAME} />
-                <meta itemProp="name" content="OpenData St.Gallen" />
-                <meta itemProp="inLanguage" content="de" />
-                <meta itemProp="alternateName" content="ODSG" />
-                <meta itemProp="description" content="Open Data Portal für den Kanton St.Gallen" />
-                <meta itemProp="keywords" content="St.Gallen, Open Data, Open Government, Schweiz, Kantonsrat, Medienmitteilungen, Polizeimeldungen, Vernehmlassungen" />
-            </span>
         </footer>
     )
 }

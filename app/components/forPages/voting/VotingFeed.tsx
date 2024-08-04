@@ -31,18 +31,21 @@ export default function VotingFeed({ feed, count }: { count: number, feed: APIRa
             <section className="a_sec">
                 <div className="a_sub_sec">
                     <table className="t_1 la" width="100%">
+                    <colgroup  span={3}/>
+                        <colgroup span={2} className="cg_sha" />
+
                         <thead className="t_sticky_header">
                             <tr>
                                 <th colSpan={3}>{abstimmung}</th>
-                                <th colSpan={2}>{stizung}</th>
-                                <th colSpan={3}>{geschaeft}</th>
+                                <th className="sha" colSpan={2}>{stizung}</th>
+                                <th  colSpan={3}>{geschaeft}</th>
                             </tr>
                             <tr>
                                 <th>{datum}</th>
                                 <th>{title}</th>
                                 <th>{oeffentlich}</th>
-                                <th>{session}</th>
-                                <th>{title}</th>
+                                <th className="sha">{session}</th>
+                                <th className="sha">{title}</th>
                                 <th>{nummer}</th>
                                 <th>{title}</th>
                                 <th>{typ}</th>

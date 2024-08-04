@@ -4,7 +4,6 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 export default function StackedBarChart({ data }: {
     data: Record<string, number>[]
 }) {
-
     const viewData = []
 
     for (let i = 0; i < data.length; i += 1) {

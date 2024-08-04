@@ -10,7 +10,6 @@ export default function GroupItem({ item,
         item: APIRatsinfoGroupFull,
         people: APIRatsinfoPeopleBase[]
     }) {
-
     const { labels: { generics: { name, typ, aktiv, start, ende, yes, no, mitglieder, geschaefte } } } = texts
 
     return (
@@ -56,13 +55,13 @@ export default function GroupItem({ item,
                             overflow: 'auto'
                         }}
                     >
-                        <BusinessBaseTable caption={geschaefte}
-                            // groups={groups}
-                            feed={item.business_participations} />
+                        <BusinessBaseTable
+                            caption={geschaefte}
+                            feed={item.business_participations}
+                        />
                     </div>
                 </section>
             ) : null}
-
 
             {people?.length ? (
                 <section className="a_sec">
@@ -70,7 +69,11 @@ export default function GroupItem({ item,
                         maxHeight: '75vh',
                         overflow: 'auto'
                     }}>
-                        <PeopleBaseTable caption={mitglieder} feed={people} includeSchemaMember={true} />
+                        <PeopleBaseTable
+                            caption={mitglieder}
+                            feed={people}
+                            includeSchemaMember={true}
+                        />
                     </div>
                 </section>
             ) : null}
