@@ -45,7 +45,7 @@ export default function Impressum() {
                 <div className="page_content">
                     <p style={{ padding: '1rem', marginBottom: '0.5rem', backgroundColor: 'var(--gray-2)' }}>OpenData St. Gallen ist ein privates Open Data und Open Source Projekt. Das Projekt richtet sich an jene, die sich für öffentliche Angelegenheiten und das Geschehen in Stadt und Kanton St.Gallen interessieren.</p>
                     <p style={{ padding: '1rem', marginBottom: '0.5rem', backgroundColor: 'var(--gray-2)' }}>Daten, Texte und Bilder stammen von der Stadt und dem Kanton St.Gallen. Interessierte können sich mittels Medienmitteilungen auf dem Laufenden halten und sich über Abstimmungen, Geschäfte, Gremien und Personen des Kantonsrates informieren.</p>
-                    <p style={{ padding: '1rem', marginBottom: '0.5rem', backgroundColor: 'var(--gray-2)' }}>Der Quellcode der Webseite ist offen einsehbar. Die Webseite verwendet keine Tracking-Tools.</p>
+                    <p style={{ padding: '1rem', marginBottom: '0.5rem', backgroundColor: 'var(--gray-2)' }}>Der Quellcode der Webseite ist offen einsehbar. Die Quelle der Bilder von Pressemitteilungen versuchen ein Cookie zu setzen, davon abgesehen verwendet die Webseite keine Tracking-Tools.</p>
 
                     <div className="article_footer" style={{ marginTop: 'unset', backgroundColor: 'var(--gray-1)' }}>
                         <div className="article_source_block"

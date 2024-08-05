@@ -53,11 +53,13 @@ export const loader: LoaderFunction = async ({ params }) => {
 
         if (feedGeschaeft) {
             const item = { ...feedGeschaeft, dokumente, beteiligungen, abstimmungen: feedAbstimmungen, groups }
+           
             return json({ item })
         } else {
             return json({ item: null })
         }
-    } catch {
+    } catch (r) {
+        console.log({ r })
         return json(null, { status: 404 })
     }
 }

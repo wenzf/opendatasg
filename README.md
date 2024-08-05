@@ -25,9 +25,9 @@
 
 ### Handling of media releases data
 
-Media releases are potentially the most requested content type. Since some of the used APIs limit the number of daily requests, data for media releases are stored in a database (DynamoDB) after they have been retrieved by the API and converted to a internal data structure. The data of the database and the current state of data provided by APIs is kept in sync by an event driven process:
+Media releases are potentially the most requested content type. Since some of the used APIs limit the number of daily requests, data for media releases are stored in a database (DynamoDB) after they have been retrieved and converted to a internal data structure. The database and the current state of data provided by APIs is kept in sync by an event driven process:
 
-- 1: The request hits the backend, the `index entry` is read from the database which contains the timestamp of the last requested and the number of entries (`total_results`) per API. If the last query was longer ago than `DATA_UPDATE_INTERVAL_TIME_IN_MS`, continue in step 2, otherwise, step 3b
+- 1: The request hits the backend, the `index entry` is read from the database which contains the timestamp of the last request and the number of entries (`total_results`) per API. If the last query was longer ago than `DATA_UPDATE_INTERVAL_TIME_IN_MS`, continue with step 2, otherwise, step 3b
 - 2: Request to the API. Update `index entry`. If `total_results` from the response is equal to the entry in `index entry`, continue with step 3b, otherwise, step 3a.
 - 3a: Data from the API from the previous step is converted into the internal data structure and saved in the database. The response is then sent to the client.
 - 3b: Content is retrieved from the database and sent to the client.
@@ -37,14 +37,13 @@ Media releases are potentially the most requested content type. Since some of th
 The mechanism to determine if database is in sync with the API data is to compare the amount of entries as returned by the API (`total_results`) in each response. In case entries are deleted from the API or in case responses are corrupted, the mechanism of keeping data in sync might not work
 as intended. As a fallback for such cases, the `index entry` is reset after `DATA_RESET_INTERVAL_TIME_IN_MS`. Therefore another timestamp is used to mark the last reset. In each reset, the last ten articles of each category are refetched and updated regardless of the evaluated sync state. This reset mechanism is triggered when requests hit the home route `/`.
 
-The content of the ten most recent articles per category (`ENTRIES_SHOWN_IN_FEED`) are overwritten on re-fetches (excluding view counters) in order to include changes in case articles have been edited after publication. This is far from perfect but should cover most cases since edits are often done
-relatively close the time of publication.
+The content of the ten most recent articles per category (`ENTRIES_SHOWN_IN_FEED`) are overwritten on re-fetches (excluding view counters) in order to include changes in case articles have been edited after publication.
 
 ### Key components
 
 | name | file |           function        | noteworthy dependencies |
 |---|---|------------------------------------------------------------------------------------|---|
-|`dataAPI`|[dataAPI.server.ts](./app/utils/serverOnly/dataAPI/dataAPI.server.ts)| fetching data from API |[dataAPIConfigConstructor](./app/serverOnly/dataAPI/dataAPIConfigConstructor.server.ts)|
+|`dataAPI`|[dataAPI.server.ts](./app/utils/serverOnly/dataAPI/dataAPI.server.ts)| fetching data from API |[dataAPIConfigConstructor](./app/utils/serverOnly/dataAPI/dataAPIConfigConstructor.server.ts)|
 |*database calls*|[dbmain.server.ts](./app/utils/serverOnly/dynamoDB/dbmain.server.ts)| interactions with DynamoDB ||
 |`extractAndModifyTextContent`|[markupUtils.server.ts](./app/utils/serverOnly/dataAPI/markupUtils.server.ts)| re-format text content: extract article lead (used for *meta description*), replace subtitles formatted in `<b>` with `<h2>` tags |[linkdom](https://github.com/WebReflection/linkedom), [sanitize-html](https://github.com/apostrophecms/sanitize-html)|
 |`prettyMarkup`|[prettyMarkup.server.ts](./app/utils/serverOnly/dataAPI/prettyMarkup.server.ts)| convert article to the internal datastructure by configuration |`extractAndModifyTextContent`|
@@ -55,17 +54,12 @@ relatively close the time of publication.
 
 This respository uses a deployment pipeline for AWS services.
 
-The project uses the a standard template for development and deployment. For development and deployment follow the guides.
 - [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - [Arc template](https://github.com/remix-run/remix/tree/main/templates/classic-remix-compiler/arc)
 - [Arc quick start](https://arc.codes/docs/en/get-started/quickstart)
 - [Arc deployment](https://arc.codes/docs/en/reference/cli/deploy)
 - [Deployment on AWS with custom domain](https://arc.codes/docs/en/guides/domains/registrars/route53-and-cloudfront)
 
-
-```sh
-    $ npm run dev
-```
 
 ### Setting enviroment variables
 
@@ -80,7 +74,7 @@ The project uses the a standard template for development and deployment. For dev
 
 ### Possible issues related to deployment
 
-Several issues related to the deployment pipeline and server side rendeing are possible. Some usual suspects:
+Several issues related to the deployment pipeline and server side rendering are possible. Some usual suspects:
 
 - Are environment variables set? See above.
 - Are secrets on Github set (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`)?

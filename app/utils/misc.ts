@@ -5,7 +5,11 @@ export function removeTrailingSlash(str: string): string {
 
 
 export const getLabelById = (dict: Record<string, string>, id: string | number) => {
-  const _id = id.toString()
-  if (dict[_id]) return dict[_id]
-  return id
+  if (!id) return id
+  const _id = id?.toString()
+  try {
+    if (dict[_id]) return dict[_id]
+  } catch {
+    return id
+  }
 }

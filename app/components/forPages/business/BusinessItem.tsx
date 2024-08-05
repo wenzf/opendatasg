@@ -226,7 +226,7 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
                                         </td>
                                         <td >
                                             <div style={{ maxWidth: '85vw' }} className="td_any" dangerouslySetInnerHTML={{ __html: it.text }} />
-                                            {it.audio_file ? (
+                                            {it?.audio_file ? (
                                                 <div className="audio_fr">
                                                     <audio controls>
                                                         <source src={it.audio_file} type="audio/mpeg" />
