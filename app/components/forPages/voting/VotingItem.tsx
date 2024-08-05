@@ -95,7 +95,7 @@ export default function VotingItem({
     const FilterInput = ({ prop, label }: { prop: keyof ItemFilter, label: string }) => (
         <th style={{ alignContent: 'baseline' }}>
             <SelectPrimitive
-                selectlabel={label}
+                selectlabel={label ?? 'Filter'}
                 options={frequencies[prop].map((it) => ({ label: `${it.val} (${it.count})`, value: it.val })).filter((itt) => !itemFilter[prop].includes(itt.value))}
                 setter={(e) => {
                     setItemFilter((prev) => {
@@ -157,7 +157,7 @@ export default function VotingItem({
                             </tr>
                             <tr>
                                 <th>{datum}</th>
-                                <td itemProp="startDate" content={item.date}>{formatDateShort(item.date)}</td>
+                                <td itemProp="startDate endDate" content={item.date}>{formatDateShort(item.date)}</td>
                             </tr>
                             <tr>
                                 <th>{created_bearbeitet}</th>
@@ -300,8 +300,8 @@ export default function VotingItem({
                         </thead>
                         <tbody>
                             {//@ts-expect-error ext type
-                                frequencies.person_election_district_title.sort(sorterBallots('val', true)).map((it) => (
-                                    <tr key={it.val}>
+                                frequencies.person_election_district_title.sort(sorterBallots('val', true)).map((it, ind) => (
+                                    <tr key={it.val + ind}>
                                         <td>{it.val}</td>
                                         <td>{it.yes}</td>
                                         <td>{Math.round(it.yes / it.count * 10000) / 100}%</td>
@@ -351,8 +351,8 @@ export default function VotingItem({
                         </thead>
                         <tbody>
                             {//@ts-expect-error ext type
-                                frequencies.person_party.sort(sorterBallots('val', true)).map((it) => (
-                                    <tr key={it.val}>
+                                frequencies.person_party.sort(sorterBallots('val', true)).map((it, ind) => (
+                                    <tr key={it.val + ind}>
                                         <td>{it.val}</td>
                                         <td>{it.yes}</td>
                                         <td>{Math.round(it.yes / it.count * 10000) / 100}%</td>

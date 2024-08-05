@@ -1,5 +1,5 @@
 
-import { MetaFunction } from "@remix-run/node";
+import { HeadersFunction, MetaFunction } from "@remix-run/node";
 import SearchKantonsrat from "../components/generics/SearchKantonsrat";
 import { PUBLIC_CONFIG } from "../config";
 import texts from "../texts";
@@ -10,6 +10,13 @@ import { NavLink } from "@remix-run/react";
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_MAIN
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction = ({ location }) => {

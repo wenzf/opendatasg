@@ -1,5 +1,5 @@
 
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
+import { HeadersFunction, json, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import GroupItem from "~/components/forPages/group/GroupItem";
 import NoResponse from "~/components/generics/NoResponse";
@@ -7,9 +7,17 @@ import { PUBLIC_CONFIG } from "~/config";
 import { BACKEND_CONFIG } from "~/config/backend.server";
 import { removeTrailingSlash } from "~/utils/misc";
 
+
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_GREMIEN_ITEM
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
@@ -46,7 +54,11 @@ export const loader: LoaderFunction = async ({ params }) => {
         const people = await peopleRaw.json()
 
         if (item) {
-            return json({ item, people: people })
+            return json({ item, people: people }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json({ item: null, people: [] })
         }
@@ -54,6 +66,7 @@ export const loader: LoaderFunction = async ({ params }) => {
         return json(null, { status: 404 })
     }
 }
+
 
 export default function GroupItemPage() {
     const loaderData = useLoaderData<typeof loader>()

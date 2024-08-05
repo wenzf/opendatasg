@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node"
+import { HeadersFunction, json, LoaderFunction, MetaFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import BusinessItem from "~/components/forPages/business/BusinessItem"
 import NoResponse from "~/components/generics/NoResponse"
@@ -12,6 +12,14 @@ import { dataAPIRatstinfoGroups } from "~/utils/serverOnly/dataAPI/dataAPI.serve
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_GESCHAEFT_ITEM
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
+
 
 export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
     if (!data?.item) return []
@@ -53,17 +61,20 @@ export const loader: LoaderFunction = async ({ params }) => {
 
         if (feedGeschaeft) {
             const item = { ...feedGeschaeft, dokumente, beteiligungen, abstimmungen: feedAbstimmungen, groups }
-           
-            return json({ item })
+
+            return json({ item }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json({ item: null })
         }
     } catch (r) {
-        console.log({ r })
+        //   console.log({ r })
         return json(null, { status: 404 })
     }
 }
-
 
 
 export default function KantonsratGeschaeft() {

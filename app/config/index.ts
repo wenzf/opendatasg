@@ -2,6 +2,7 @@ export const PUBLIC_CONFIG = Object.freeze({
     SITE_NAME: 'OpenData St. Gallen',
     DOMAIN_NAME: 'https://odsg.ch',
     DOMAIN_NAME_DEV: 'http://localhost:3333',
+    RESPONSE_CACHE_TIME_IN_S: 300, 
     ROUTE_FRAGMENTS: {
         MITTEILUNGEN: 'mitteilungen',
         VERNEHMLASSUNGEN: 'vernehmlassungen',
@@ -95,13 +96,40 @@ export const ThemeOptions = {
 
 // wahlkreise / gemeinden
 export const subDistrictsByDistricts = Object.freeze({
-    [`St.Gallen`]: ["St.Gallen", "Eggersriet", "Wittenbach", "Häggenschwil", "Muolen", "Waldkirch", "Andwil", "Gossau", "Gaiserwald"],
+    [`St.Gallen`]: ["St.Gallen", "Eggersriet", "Wittenbach", "Häggenschwil", "Muolen", "Waldkirch", "Andwil", "Gossau", "Gaiserwald",
+        // former districts
+        "Kronbühl"
+    ],
     Rorschach: ["Mörschwil", "Goldach", "Steinach", "Berg", "Tübach", "Untereggen", "Rorschacherberg", "Rorschach", "Thal"],
     Rheintal: ["Rheineck", "St.Margrethen", "Au", "Berneck", "Balgach", "Diepoldsau", "Widnau", "Rebstein", "Marbach", "Altstätten", "Eichberg", "Oberriet", "Rüthi"],
-    Werdenberg: ["Sennwald", "Gams", "Grabs", "Buchs", "Sevelen", "Wartau"],
-    Sarganserland: ["Sargans", "Vilters-Wangs", "Bad Ragaz", "Pfäfers", "Mels", "Flums", "Walenstadt", "Quarten"],
-    [`See-Gaster`]: ["Amden", "Weesen", "Schänis", "Benken", "Kaltbrunn", "Gommiswald", "Uznach", "Schmerikon", "Rapperswil-Jona", "Eschenbach"],
-    Toggenburg: ["Wildhaus-Alt St.Johann", "Nesslau", "Ebnat-Kappel", "Wattwil", "Lichtensteig", "Neckertal", "Bütschwil-Ganterschwil", "Lütisburg", "Mosnang", "Kirchberg"],
-    Wil: ["Jonschwil", "Oberuzwil", "Uzwil", "Flawil", "Degersheim", "Wil", "Zuzwil", "Oberbüren", "Niederbüren", "Niederhelfenschwil"]
+    Werdenberg: ["Sennwald", "Gams", "Grabs", "Buchs", "Sevelen", "Wartau",
+        // former districts
+        "Fontnas"
+    ],
+    Sarganserland: ["Sargans", "Vilters-Wangs", "Bad Ragaz", "Pfäfers", "Mels", "Flums", "Walenstadt", "Quarten",
+        // former districts
+        "Flumserberg",
+        "Vilters"
+    ],
+    [`See-Gaster`]: ["Amden", "Weesen", "Schänis", "Benken", "Kaltbrunn", "Gommiswald", "Uznach", "Schmerikon", "Rapperswil-Jona", "Eschenbach",
+        // fallback
+        "Ernetschwil",
+        "Jona"
+    ],
+    Toggenburg: ["Wildhaus-Alt St.Johann", "Nesslau", "Ebnat-Kappel", "Wattwil", "Lichtensteig", "Neckertal", "Bütschwil-Ganterschwil", "Lütisburg", "Mosnang", "Kirchberg",
+        // former districts
+        "Oberhelfenschwil",
+        "Bütschwil",
+        "Nesslau-Krummenau",
+        "Necker",
+        "Kaltbrunn",
+        "Bazenheid",
+        "Jona"
+    ],
+    Wil: ["Jonschwil", "Oberuzwil", "Uzwil", "Flawil", "Degersheim", "Wil", "Zuzwil", "Oberbüren", "Niederbüren", "Niederhelfenschwil",
+        // former districts
+        "Bronschhofen",
+        "Niederbühren"
+    ]
 })
 

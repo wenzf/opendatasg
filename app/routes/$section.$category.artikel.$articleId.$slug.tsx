@@ -1,4 +1,4 @@
-import { LoaderFunction, MetaFunction, json, redirect } from "@remix-run/node"
+import { HeadersFunction, LoaderFunction, MetaFunction, json, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { isbot } from "isbot"
 import ContentItem from "~/components/forPages/media/ContentItem"
@@ -10,6 +10,13 @@ import { contentTypesAndItemsPerRequestByParams } from "~/utils/serverOnly/forLo
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.ARTICLE
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -50,7 +57,13 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         }
 
         if (res.canonical === path) {
-            return json(res)
+
+            return json(res, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            }
+            )
         } else {
             return redirect(res.canonical, { status: 302 })
         }

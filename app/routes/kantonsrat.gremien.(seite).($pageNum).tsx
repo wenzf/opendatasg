@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
+import { HeadersFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import GroupFeed from "~/components/forPages/group/GroupFeed";
 import NoResponse from "~/components/generics/NoResponse";
@@ -16,8 +16,15 @@ export const handle = {
 }
 
 
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
+
+
 export const meta: MetaFunction<typeof loader> = ({ location, params, data }) => {
-    const { DOMAIN_NAME, DEFAULT_OG_IMAGE, ROUTE_FRAGMENTS: { SEARCH_PARAM_FRAGMENT} } = PUBLIC_CONFIG
+    const { DOMAIN_NAME, DEFAULT_OG_IMAGE, ROUTE_FRAGMENTS: { SEARCH_PARAM_FRAGMENT } } = PUBLIC_CONFIG
     const { metasAndTitles: { kantonsrat_gremien_feed, kantonsrat_gremien_feed_search } } = texts
     const { pathname } = location
     const { pageNum } = params
@@ -45,10 +52,9 @@ export const meta: MetaFunction<typeof loader> = ({ location, params, data }) =>
 }
 
 
-
 export const loader: LoaderFunction = async ({ params, request }) => {
     const { DATA_API: { ENDPOINTS: { RATSINFO } } } = BACKEND_CONFIG
-    const { ENTRIES_SHOWN_IN_RATSINFO, ROUTE_FRAGMENTS: {KANTONSRAT, GREMIEN} } = PUBLIC_CONFIG
+    const { ENTRIES_SHOWN_IN_RATSINFO, ROUTE_FRAGMENTS: { KANTONSRAT, GREMIEN } } = PUBLIC_CONFIG
     const { pageNum } = params;
     const page = pageNum ? pageNum : 1
     const { searchParams } = new URL(request.url);
@@ -61,14 +67,19 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         const feedFromApiRaw = await fetch(encodeURI(RATSINFO + '/groups' + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}`));
         const feedFromApi: { count: number, results: APIRatsinfoGroupBase[] } = await feedFromApiRaw.json()
         if (feedFromApi.results) {
-            return json({...feedFromApi, keywordSearchParam})
+            return json({ ...feedFromApi, keywordSearchParam }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json({ feed: null, count: null })
         }
     } catch {
-        return json(null, {status: 404})
+        return json(null, { status: 404 })
     }
 }
+
 
 export default function GroupsFeed() {
     const loaderData = useLoaderData<typeof loader>()

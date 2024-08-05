@@ -1,4 +1,4 @@
-import { LoaderFunction, MetaFunction, json } from "@remix-run/node"
+import { HeadersFunction, LoaderFunction, MetaFunction, json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import { isbot } from "isbot";
 import { Masonry } from "react-plock";
@@ -15,6 +15,13 @@ import { removeTrailingSlash } from "~/utils/misc";
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.FEED
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction = ({ params, location }) => {
@@ -50,7 +57,13 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         itemsPerRequest,
         offset
     })
-    return json({ ...res, isBot })
+
+    return json({ ...res, isBot }, {
+        headers: {
+            "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+        }
+    }
+    )
 }
 
 

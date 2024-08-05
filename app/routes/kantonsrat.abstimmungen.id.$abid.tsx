@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node"
+import { HeadersFunction, json, LoaderFunction, MetaFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { BACKEND_CONFIG } from "~/config/backend.server"
 import { ballotDataAndStats } from "~/utils/forData"
@@ -12,6 +12,13 @@ import NoResponse from "~/components/generics/NoResponse"
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_ABSTIMMUNGEN_ITEM
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
@@ -34,6 +41,7 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
     ]
 }
 
+
 export const loader: LoaderFunction = async ({ params }) => {
     const { DATA_API: { ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_VOTINGS } } } = BACKEND_CONFIG
     const { abid } = params
@@ -52,18 +60,23 @@ export const loader: LoaderFunction = async ({ params }) => {
             const forMap = { districts }
 
             const payload = { item: abstimmungFromAPI, frequencies, forMap, modifiedBallots }
-            return json(payload)
+
+            return json(payload, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         }
-    } catch {
+    } catch (e) {
+        //   console.log({ e })
         return json(null, { status: 404 })
     }
 }
 
 
-
-
 export default function AbstimmungItemRoute() {
     const loaderData = useLoaderData<typeof loader>()
+
     return (
         <>
             {loaderData?.item ? <VotingItem item={loaderData.item} frequencies={loaderData.frequencies} forMap={loaderData.forMap} modifiedBallots={loaderData.modifiedBallots} /> : <NoResponse />}

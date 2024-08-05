@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node"
+import { HeadersFunction, json, LoaderFunction, MetaFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react";
 import PeopleItem from "~/components/forPages/people/PeopleItem";
 import NoResponse from "~/components/generics/NoResponse";
@@ -7,9 +7,17 @@ import { BACKEND_CONFIG } from "~/config/backend.server";
 import { APIRatsinfoPeopleFull } from "~/types/ratsinfoAPI";
 import { removeTrailingSlash } from "~/utils/misc";
 
+
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_PERSONEN_ITEM
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
@@ -43,7 +51,11 @@ export const loader: LoaderFunction = async ({ params }) => {
         const item: APIRatsinfoPeopleFull = await itemRaw.json()
 
         if (item) {
-            return json({ item })
+            return json({ item }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json({ item: null })
         }
@@ -51,6 +63,7 @@ export const loader: LoaderFunction = async ({ params }) => {
         return json(null, { status: 404 })
     }
 }
+
 
 export default function PersonenItem() {
     const loaderData = useLoaderData<typeof loader>()

@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node"
+import { HeadersFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react";
 import PeopleFeed from "~/components/forPages/people/PeopleFeed";
 import NoResponse from "~/components/generics/NoResponse";
@@ -13,6 +13,14 @@ import { removeTrailingSlash } from "~/utils/misc";
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_PERSONEN_FEED
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
+
 
 export const meta: MetaFunction<typeof loader> = ({ location, params, data }) => {
     const { DOMAIN_NAME, DEFAULT_OG_IMAGE, ROUTE_FRAGMENTS: { SEARCH_PARAM_FRAGMENT } } = PUBLIC_CONFIG
@@ -53,13 +61,16 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     if (pageNum === '0' || pageNum === '1') return redirect(`/${KANTONSRAT}/${PERSONEN}`, { status: 302 })
 
-
     try {
         const page = pageNum ? pageNum : 1
         const feedFromApiRaw = await fetch(RATSINFO + '/people' + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}&ordering=last_name`);
         const feedFromApi: { count: number, results: APIRatsinfoPeopleBase[] } = await feedFromApiRaw.json()
         if (feedFromApi) {
-            return json({ ...feedFromApi, keywordSearchParam })
+            return json({ ...feedFromApi, keywordSearchParam }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json(null)
         }

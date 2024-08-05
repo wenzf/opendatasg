@@ -1,4 +1,4 @@
-import { LoaderFunction, MetaFunction, json } from "@remix-run/node"
+import { HeadersFunction, LoaderFunction, MetaFunction, json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import { isbot } from "isbot"
 import { Masonry } from "react-plock"
@@ -16,6 +16,13 @@ const { DOMAIN_NAME, DEFAULT_OG_IMAGE, PAGE_HANDLES: { SEARCH }, MASONRY_CONFIG 
 export const handle = {
     page: SEARCH
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
@@ -48,12 +55,20 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
             const feed = await handSearchRequest({ jobsForAPI: categories, searchTerm: searchTerm })
 
-            return json({ feed, textsAndMetas, isBot })
+            return json({ feed, textsAndMetas, isBot }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return json({}, { status: 404 })
         }
     } else {
-        return json({ textsAndMetas })
+        return json({ textsAndMetas }, {
+            headers: {
+                "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+            }
+        })
     }
 }
 

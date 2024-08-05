@@ -1,4 +1,4 @@
-import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
+import { HeadersFunction, json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { isbot } from "isbot";
 import { Masonry } from "react-plock";
@@ -12,7 +12,7 @@ import { prettyFeed } from "~/utils/forContent";
 
 const {
   PAGE_HANDLES: { HOME }, DOMAIN_NAME, DEFAULT_OG_IMAGE, MASONRY_CONFIG,
-  ENTRIES_SHOWN_IN_FEED
+  ENTRIES_SHOWN_IN_FEED, RESPONSE_CACHE_TIME_IN_S
 } = PUBLIC_CONFIG
 
 
@@ -21,7 +21,14 @@ export const handle = {
 }
 
 
-export const loader: LoaderFunction = async ({ request}) => {
+export const headers: HeadersFunction = () => {
+  return {
+    "Cache-Control": `max-age=${RESPONSE_CACHE_TIME_IN_S}`,
+  };
+};
+
+
+export const loader: LoaderFunction = async ({ request }) => {
   const ua = request.headers.get('user-agent')
   const { KTME, KTVE, STME, STPO } = NS_CONTENT_CATEGORY
   const requestedContentTypes: ContentCategoryKeys[] = [KTME, KTVE, STME, STPO]
@@ -31,11 +38,14 @@ export const loader: LoaderFunction = async ({ request}) => {
     requestedContentTypes,
     offset: 0,
     itemsPerRequest: ENTRIES_SHOWN_IN_FEED
-
   })
 
-
-  return json({ ...res, isBot })
+  return json({ ...res, isBot }, {
+    headers: {
+      "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    }
+  }
+  )
 }
 
 
@@ -112,7 +122,7 @@ export default function Index() {
           config={MASONRY_CONFIG}
         />
       )}
-
+      
     </main>
   );
 }

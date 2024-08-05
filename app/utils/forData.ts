@@ -1,37 +1,78 @@
 import { subDistrictsByDistricts } from "~/config";
-import {  BallotFrequencies } from "~/types";
+import { BallotFrequencies } from "~/types";
 import { Ballot, BallotModified } from "~/types/ratsinfoAPI";
 
 export const sorterBallots = (prop: keyof BallotModified, isAsc: boolean) => (a: BallotModified, b: BallotModified) => {
-  const aProp = a[prop].toString().toUpperCase()
-  const bProp = b[prop].toString().toUpperCase()
 
-  if (aProp < bProp) {
-    return isAsc ? -1 : 1;
-  } else if (aProp > bProp) {
-    return isAsc ? 1 : -1;
-  } else {
-    return 0;
+  try {
+
+
+
+    const aProp = a[prop].toString().toUpperCase()
+    const bProp = b[prop].toString().toUpperCase()
+
+    if (aProp < bProp) {
+      return isAsc ? -1 : 1;
+    } else if (aProp > bProp) {
+      return isAsc ? 1 : -1;
+    } else {
+      return 0;
+    }
+  } catch {
+    return 1
   }
 };
 
- const modifyBallot = (ballot: Ballot): BallotModified => {
+const modifyBallot = (ballot: Ballot): BallotModified => {
   let ballotModified: Partial<BallotModified> = {}
   const staticBallot = ballot
   const district = staticBallot.person_election_district_title as keyof typeof subDistrictsByDistricts
   const person_political_name = staticBallot.person_political_name
   const gemeinden = subDistrictsByDistricts[district]
 
-  for (let i = 0; i < gemeinden.length; i += 1) {
-    const oneSub = gemeinden[i]
+  /**
+   * HANDLING OF
+   * - person_political_name 
+   * - person_election_district_title
+   * ITEMS THAT DON'T MATCH REGULAR PATTERN
+  */
 
-    if (person_political_name.indexOf(oneSub) !== -1) {
-      const person_name = person_political_name.replace(`-${oneSub}`, '')
-      ballotModified = {...ballot, person_name, sub_district: oneSub }
-    
+  if (gemeinden?.length) {
+    for (let i = 0; i < gemeinden.length; i += 1) {
+      const oneSub = gemeinden[i]
+      if (person_political_name.indexOf(oneSub) !== -1) {
+        // CASE  person_political_name: "Brunner-Egg (Flawil)" instead of Brunner-Egg-Flawil
+        // https://ratsinfo.sg.ch/api/votings/3322
+        if (person_political_name.indexOf(`(${oneSub})`) !== -1) {
+          const person_name = person_political_name.replace(` (${oneSub})`, '')
+          ballotModified = { ...ballot, person_name, sub_district: oneSub, person_political_name: `${person_name}-${oneSub}` }
+        } else {
+          const person_name = person_political_name.replace(`-${oneSub}`, '')
+          ballotModified = { ...ballot, person_name, sub_district: oneSub }
+        }
+      }
     }
+  } else {
+    // CASE in gemeinden: 'See Gaster' instead of 'See-Gaster'
+    // https://ratsinfo.sg.ch/api/votings/4267
+    const alternativeDistrictname = district.replace(' ', '-')
+    // @ts-expect-error alternative name not typed
+    const alternativeGemeinden = subDistrictsByDistricts[alternativeDistrictname]
+
+    if (alternativeGemeinden?.length) {
+
+      for (let i = 0; i < alternativeGemeinden.length; i += 1) {
+        const oneSub = alternativeGemeinden[i]
+
+        if (person_political_name.indexOf(oneSub) !== -1) {
+          const person_name = person_political_name.replace(`-${oneSub}`, '')
+          ballotModified = { ...ballot, person_name, sub_district: oneSub, person_election_district_title: ballot.person_election_district_title.replace(' ', '-') }
+        }
+      }
+    }
+
+
   }
-  
   return ballotModified as BallotModified
 }
 

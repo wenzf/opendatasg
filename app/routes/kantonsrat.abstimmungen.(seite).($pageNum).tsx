@@ -1,4 +1,4 @@
-import { json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node"
+import { HeadersFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import VotingFeed from "~/components/forPages/voting/VotingFeed"
 import NoResponse from "~/components/generics/NoResponse"
@@ -13,6 +13,13 @@ import { removeTrailingSlash } from "~/utils/misc"
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.KANTONSRAT_ABSTIMMUNGEN_FEED
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction<typeof loader> = ({ location, data, params }) => {
@@ -62,7 +69,11 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         const feedRaw = await fetch(`${RATSINFO + RATSINFO_FRAGMENT_VOTINGS}?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}`)
         const feed: APIRatsinfoVotings = await feedRaw.json()
         if (feed) {
-            return json({ ...feed, keywordSearchParam })
+            return json({ ...feed, keywordSearchParam }, {
+                headers: {
+                    "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+                }
+            })
         } else {
             return null
         }
@@ -70,6 +81,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         return json(null, { status: 404 })
     }
 }
+
 
 export default function KantonsratAbstimmungenFeed() {
     const loaderData = useLoaderData<typeof loader>()

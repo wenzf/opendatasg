@@ -1,4 +1,4 @@
-import { MetaFunction } from "@remix-run/node"
+import { HeadersFunction, MetaFunction } from "@remix-run/node"
 import { Link } from "@remix-run/react"
 import { PUBLIC_CONFIG } from "~/config"
 import GithubIconSVG from "~/resources/icons/GithubIconSVG"
@@ -8,6 +8,13 @@ import texts from "~/texts"
 export const handle = {
     page: PUBLIC_CONFIG.PAGE_HANDLES.IMPRESSUM
 }
+
+
+export const headers: HeadersFunction = () => {
+    return {
+        "Cache-Control": `max-age=${PUBLIC_CONFIG.RESPONSE_CACHE_TIME_IN_S}`,
+    };
+};
 
 
 export const meta: MetaFunction = () => {

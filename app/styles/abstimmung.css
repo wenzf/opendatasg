@@ -123,6 +123,10 @@
 }
 */
 
+.t_1.la tbody tr {
+  transition: background-color 0.25s, box-shadow 0.5s;
+}
+
 .t_1.la tbody tr:hover {
   background: var(--gray-3);
   box-shadow: inset 0 -3px 8px var(--gray-5);
