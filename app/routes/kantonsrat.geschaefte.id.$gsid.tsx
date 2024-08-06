@@ -29,7 +29,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
     return [
         { title: `Geschäft ${data.item.number} des Kantonsrates St.Gallen` },
-        { name: "description", content: "Geschäft des Kantonsrates St.Gallen: " + data?.item?.title },
+        {
+            name: "description",
+            content: "Geschäft des Kantonsrates St.Gallen: " + data?.item?.title
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -44,7 +47,9 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
 
 export const loader: LoaderFunction = async ({ params }) => {
-    const { DATA_API: { ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_BUSINESSES, RATSINFO_FRAGMENT_PUBLISHED_DOCUMENTS, RATSINFO_FRAGMENT_BUSINESSE_PARTICIPATION } } } = BACKEND_CONFIG
+    const { DATA_API: { ENDPOINTS: {
+        RATSINFO, RATSINFO_FRAGMENT_BUSINESSES, RATSINFO_FRAGMENT_PUBLISHED_DOCUMENTS,
+        RATSINFO_FRAGMENT_BUSINESSE_PARTICIPATION } } } = BACKEND_CONFIG
     const { gsid } = params
 
     try {
@@ -53,8 +58,15 @@ export const loader: LoaderFunction = async ({ params }) => {
         const dokumenteFromApi = fetch(ratsInfoRoot + RATSINFO_FRAGMENT_PUBLISHED_DOCUMENTS).then((it) => it.json())
         const participationsFromApi = fetch(ratsInfoRoot + RATSINFO_FRAGMENT_BUSINESSE_PARTICIPATION).then((it) => it.json())
         const abstimmungenFromApi = fetch(ratsInfoRoot + 'votings').then((it) => it.json());
-        const allResponses = await Promise.all([geschaeftFromApi, dokumenteFromApi, participationsFromApi, abstimmungenFromApi]);
+
+        const allResponses = await Promise.all([
+            geschaeftFromApi,
+            dokumenteFromApi,
+            participationsFromApi,
+            abstimmungenFromApi]);
+
         const [feedGeschaeft, dokumente, beteiligungen, feedAbstimmungen] = allResponses;
+
         const groups = await dataAPIRatstinfoGroups([feedGeschaeft], [
             ['committee_id'],
             ['responsible_id']])
@@ -70,8 +82,7 @@ export const loader: LoaderFunction = async ({ params }) => {
         } else {
             return json({ item: null })
         }
-    } catch (r) {
-        //   console.log({ r })
+    } catch {
         return json(null, { status: 404 })
     }
 }

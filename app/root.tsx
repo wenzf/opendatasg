@@ -28,6 +28,10 @@ export default function App() {
   const [prefsDarkMode, setPrefsDarkmode] = useState<boolean>(false)
   const cspNonce = useContext(NonceContext);
 
+  /**
+   * TODO: REPLACE THEME WITH STD REMIX THEME SOLUTION
+   */
+
   useEffect(() => {
     if (typeof window === "object") {
       const themeFromStorage = window.localStorage.getItem('theme')

@@ -28,7 +28,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
     return [
         { title: `Kantonsrat St.Gallen | ${data.item.title}` },
-        { name: "description", content: `Kantonsrat St.Gallen ${data.item.type.title}: ${data.item.title}` },
+        {
+            name: "description",
+            content: `Kantonsrat St.Gallen ${data.item.type.title}: ${data.item.title}`
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -43,12 +46,14 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
 
 export const loader: LoaderFunction = async ({ params }) => {
-    const { DATA_API: { ENDPOINTS: { RATSINFO } } } = BACKEND_CONFIG
+    const { DATA_API: { ENDPOINTS: {
+        RATSINFO, RATSINFO_FRAGMENT_GROUPS, RATSINFO_FRAGMENT_PEOPLE } }
+    } = BACKEND_CONFIG
     const { gid } = params;
 
     try {
-        const itemCall = fetch(RATSINFO + '/groups/' + gid);
-        const peopleCall = fetch(RATSINFO + `/people?committee=${gid}&ordering=last_name`);
+        const itemCall = fetch(RATSINFO + RATSINFO_FRAGMENT_GROUPS + '/' + gid);
+        const peopleCall = fetch(RATSINFO + `${RATSINFO_FRAGMENT_PEOPLE}?committee=${gid}&ordering=last_name`);
         const [itemRaw, peopleRaw] = await Promise.all([itemCall, peopleCall])
         const item = await itemRaw.json()
         const people = await peopleRaw.json()

@@ -23,8 +23,8 @@ export const PUBLIC_CONFIG = Object.freeze({
         SEARCH_PARAM_FRAGMENT: '?search='
     },
     RATSINFO_ROOT: 'https://www.ratsinfo.sg.ch',
-    ENTRIES_SHOWN_IN_FEED: 10,
-    ENTRIES_SHOWN_IN_RATSINFO: 50,
+    ENTRIES_SHOWN_IN_FEED: 10, // ratsinfo api
+    ENTRIES_SHOWN_IN_RATSINFO: 50, // ratsinfo api
     STYLES: {
         FEED: {
             IMAGE_MAX_WIDTH_LOW: 420,

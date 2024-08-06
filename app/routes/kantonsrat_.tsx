@@ -49,8 +49,8 @@ export default function Kantonsrat() {
             <div className="a_main_2">
                 <section className="a_search_fr">
                     <h2>Daten</h2>
-                    <p>Informieren Sie sich über die Aktivitäten des Kantonsrates St.Gallen, dessen Gremien wie Kommissionen oder Parteien sowie akuelle oder ehemalige Kantonsrätinnen und Kantonsräte.</p>
-                    <p>Der Datensatz beinhaltet Geschäfte und Abstimmungen des Kantonsrates St.Gallen seit 2006, einzelne Geschäfte seit 1993. Die Originaldaten sind auf der offiziellen <NavLink to="https://www.ratsinfo.sg.ch/api">Webseite des Ratsinformationssystems</NavLink> des Kantons St.Gallen unter abrufbar.</p>
+                    <p>Informieren Sie sich über die Aktivitäten des Kantonsrates St.Gallen, dessen Gremien wie Kommissionen oder Parteien sowie über akuelle oder ehemalige Kantonsrätinnen und Kantonsräte.</p>
+                    <p>Der Datensatz beinhaltet Geschäfte und Abstimmungen des Kantonsrates seit 2006, einzelne Geschäfte seit 1993. Die Originaldaten sind auf der offiziellen <NavLink to="https://www.ratsinfo.sg.ch/api">Webseite des Ratsinformationssystems</NavLink> des Kantons St.Gallen abrufbar.</p>
                 </section>
                 <section>
                     <div className="a_search_fr" style={{ letterSpacing: '0.7px' }}>

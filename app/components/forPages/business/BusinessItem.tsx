@@ -5,7 +5,6 @@ import { ratsinfo_business_types, ratsinfo_topics } from "~/resources/api_static
 import CheckIconSVG from "~/resources/icons/CheckIconSVG";
 import Cross2IconSVG from "~/resources/icons/Cross2IconSVG";
 import texts from "~/texts";
-// import { APIRatsinfoBusinessesExtended } from "~/types";
 import { APIRatsinfoBusinessFull } from "~/types/ratsinfoAPI";
 import { getLabelById } from "~/utils/misc";
 import { formatDateShort } from "~/utils/time";
@@ -26,8 +25,8 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
         ABSTIMMUNG, KANTONSRAT, GREMIEN, PERSONEN } } = PUBLIC_CONFIG
 
     return (
-        <main className="a_main sp">
-            <h1 className="a_h1">{geschaeft}: {item?.title}</h1>
+        <main className="a_main sp" itemScope itemType="https://schema.org/Legislation">
+            <h1 className="a_h1" itemProp="headline">{geschaeft}: {item?.title}</h1>
 
             <section className="a_sec">
                 <div className="a_sub_sec">
@@ -40,31 +39,40 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
                         <tbody>
                             <tr>
                                 <th>{komitee}</th>
-                                <td>{item.groups['g_' + item?.committee_id]?.title}</td>
+                                <td itemProp="maintainer" itemScope itemType="https://schema.org/GovernmentOrganization">
+                                    <span itemProp="name">
+                                        {item.groups['g_' + item?.committee_id]?.title}
+                                    </span>
+
+                                </td>
                             </tr>
                             <tr>
                                 <th>{nummer}</th>
-                                <td>{item.number}</td>
+                                <td itemProp="legislationIdentifier">{item.number}</td>
                             </tr>
                             <tr>
                                 <th>{title}</th>
-                                <td>{item?.title}</td>
+                                <td itemProp="name">{item?.title}</td>
                             </tr>
                             <tr>
                                 <th>{art}</th>
-                                <td>{getLabelById(ratsinfo_business_types, item?.type_id)}</td>
+                                <td itemProp="legislationType">{getLabelById(ratsinfo_business_types, item?.type_id)}</td>
                             </tr>
                             <tr>
                                 <th>{thema}</th>
-                                <td>{getLabelById(ratsinfo_topics, item.topic_id)}</td>
+                                <td itemProp="about">{getLabelById(ratsinfo_topics, item.topic_id)}</td>
                             </tr>
                             <tr>
                                 <th>{federfuehrung}</th>
-                                <td>{item.groups['g_' + item?.responsible_id].title}</td>
+                                <td itemProp="legislationResponsible" itemScope itemType="https://schema.org/GovernmentOrganization">
+                                    <span itemProp="name">
+                                        {item.groups['g_' + item?.responsible_id].title}
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <th>{eroeffnung}</th>
-                                <td>{formatDateShort(item.begin_date)}</td>
+                                <td itemProp="dateCreated" content={item.begin_date}>{formatDateShort(item.begin_date)}</td>
                             </tr>
                             <tr>
                                 <th>{abschluss}</th>
@@ -105,11 +113,14 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
                             </thead>
                             <tbody>
                                 {item.dokumente.map((it, ind) => (
-                                    <tr key={ind}>
-                                        <td>{formatDateShort(it.published_date)}</td>
-                                        <td>{it.document_type_name}</td>
-                                        <td>{it.title}</td>
-                                        <td><Link target="_blank" rel="noopener noreferrer" to={RATSINFO_ROOT + it.file}>{it.file.endsWith('.pdf') ? 'PDF' : datei}</Link></td>
+                                    <tr key={ind} itemProp="hasPart" itemScope itemType="https://schema.org/DigitalDocument">
+                                        <td itemProp="datePublished" content={it.published_date} >{formatDateShort(it.published_date)}</td>
+                                        <td itemProp="description">{it.document_type_name}</td>
+                                        <td itemProp="name">{it.title}</td>
+                                        <td><Link itemProp="url" target="_blank" rel="noopener noreferrer" to={RATSINFO_ROOT + it.file}>{it.file.endsWith('.pdf') ? 'PDF' : datei}
+                                        </Link>
+                                            <meta itemProp="digitalSourcetype" itemType="https://schema.org/PrintDigitalSource" />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -139,19 +150,29 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
                                             {it.content_type === "group" ? gremium : null}
                                             {it.content_type === "person" ? person : null}
                                         </td>
-                                        <td>
-                                            {it.content_type === "group" ? (
-                                                <NavLink to={`/${KANTONSRAT}/${GREMIEN}/id/${it.target_id}`}>
-                                                    {it.title}
-                                                </NavLink>
-                                            ) : null}
 
-                                            {it.content_type === "person" ? (
-                                                <NavLink to={`/${KANTONSRAT}/${PERSONEN}/id/${it.target_id}`}>
-                                                    {it.title}
+                                        {it.content_type === "group" ? (
+                                            <td itemProp="contributor" itemScope itemType="https://schema.org/Organization">
+                                                <NavLink itemProp="url" to={`/${KANTONSRAT}/${GREMIEN}/id/${it.target_id}`}>
+                                                    <span itemProp="name">
+                                                        {it.title}
+                                                    </span>
+
                                                 </NavLink>
-                                            ) : null}
-                                        </td>
+                                            </td>
+                                        ) : null}
+
+                                        {it.content_type === "person" ? (
+                                            <td itemProp="contributor" itemScope itemType="https://schema.org/Person">
+                                                <NavLink itemProp="url" to={`/${KANTONSRAT}/${PERSONEN}/id/${it.target_id}`}>
+                                                    <span itemProp="name">
+                                                        {it.title}
+                                                    </span>
+
+                                                </NavLink>
+                                            </td>
+                                        ) : null}
+
                                         <td>{formatDateShort(it.modified)}</td>
                                     </tr>
                                 ))}
@@ -219,22 +240,36 @@ export default function BusinessItem({ item }: { item: APIRatsinfoBusinessFull }
                             </thead>
                             <tbody>
                                 {item.statements.map((it, ind) => (
-                                    <tr key={ind}>
-                                        <td style={{ position: 'sticky', top: '2rem', backgroundColor: 'var(--gray-2)' }}>{formatDateShort(it.stated_at)}</td>
-                                        <td style={{ position: 'sticky', top: '2rem', backgroundColor: 'var(--gray-2)', fontSize: '1.125rem' }}>
+                                    <tr key={ind} itemProp="hasPart" itemScope itemType="https://schema.org/Statement">
+                                        <td className="td_sticky_1"> {formatDateShort(it.stated_at)}</td>
+                                        <td
+                                            itemProp="description"
+                                            style={{ fontSize: '1.125rem' }}
+                                            className="td_sticky_1"
+                                        >
                                             {it.type_display}
+                                            <span>
+                                                <meta itemProp="contentReferenceTime" content={it.stated_at} />
+                                            </span>
                                         </td>
-                                        <td >
-                                            <div style={{ maxWidth: '85vw' }} className="td_any" dangerouslySetInnerHTML={{ __html: it.text }} />
-                                            {it?.audio_file ? (
-                                                <div className="audio_fr">
-                                                    <audio controls>
+                                        <td>
+                                            <div
+                                                itemProp="text"
+                                                style={{ maxWidth: '85vw' }}
+                                                className="td_any"
+                                                dangerouslySetInnerHTML={{ __html: it.text }}
+                                            />
+                                            {it.audio_file ? (
+                                                <div className="audio_fr" itemProp="audio" itemScope itemType="https://schema.org/AudioObject">
+                                                    <meta itemProp="contentUrl" content={it.audio_file} />
+                                                    <meta itemProp="encodingFormat" content="audio/mpeg" />
+                                                    <meta itemProp="isAccessibleForFree" content="true" />
+                                                    <audio controls preload="none">
                                                         <source src={it.audio_file} type="audio/mpeg" />
-                                                        Ihr Browser unterstütz das Abspielen von Audiodateien nicht.
+                                                        Ihr Browser unterstützt das Abspielen von Audiodateien nicht.
                                                         <Link to={it.audio_file}>Audiodatei</Link>
                                                     </audio>
                                                 </div>
-
                                             ) : null}
                                         </td>
                                         <td>{it.meeting.title}</td>

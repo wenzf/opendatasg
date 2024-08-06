@@ -2,6 +2,10 @@ import { SetStateAction } from "react"
 import ThemeIconSVG from "~/resources/icons/ThemeIconSVG"
 import { Theme } from "~/types"
 
+/**
+ * TODO: CHANGE TO STD REMIX COOKIE BASED THEME HANDLING
+ * IN ORDER TO AVOID CONTENT FLASH
+ */
 
 type ThemeCompProps =  {
     themeSetter: (e: SetStateAction<Theme>) => void

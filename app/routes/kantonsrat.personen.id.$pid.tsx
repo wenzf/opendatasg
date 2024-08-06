@@ -28,7 +28,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
     return [
         { title: `Kantonsrat St.Gallen | ${data.item.first_name} ${data.item.last_name}` },
-        { name: "description", content: `Kontaktdaten, Aktivitäten und Mitgliedschaften von ${data.item.first_name} ${data.item.last_name} in Verbindung mit dem Kantonsrat St.Gallen.` },
+        {
+            name: "description",
+            content: `Kontaktdaten, Aktivitäten und Mitgliedschaften von ${data.item.first_name} ${data.item.last_name} in Verbindung mit dem Kantonsrat St.Gallen.`
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -43,11 +46,12 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
 
 export const loader: LoaderFunction = async ({ params }) => {
-    const { DATA_API: { ENDPOINTS: { RATSINFO } } } = BACKEND_CONFIG
+    const { DATA_API: { ENDPOINTS: {
+        RATSINFO, RATSINFO_FRAGMENT_PEOPLE } } } = BACKEND_CONFIG
     const { pid } = params;
 
     try {
-        const itemRaw = await fetch(RATSINFO + '/people/' + pid);
+        const itemRaw = await fetch(RATSINFO + RATSINFO_FRAGMENT_PEOPLE + '/' + pid);
         const item: APIRatsinfoPeopleFull = await itemRaw.json()
 
         if (item) {

@@ -2,7 +2,7 @@ import { contentSecurityPolicy } from "./contentSecurityPolicy";
 
 // https://owasp.org/www-project-secure-headers/ci/headers_remove.json
 const headersToClear = Object.freeze({
-  "last_update_utc": "2024-05-19 14:06:22",
+  "last_update_utc": "2024-07-19 16:54:00",
   "headers": [
     "$wsep",
     "Host-Header",
@@ -39,6 +39,7 @@ const headersToClear = Object.freeze({
     "X-Framework",
     "X-Generated-By",
     "X-Generator",
+    "X-Jitsi-Release",
     "X-Kubernetes-PF-FlowSchema-UI",
     "X-Kubernetes-PF-PriorityLevel-UID",
     "X-LiteSpeed-Cache",
@@ -72,7 +73,8 @@ const headersToClear = Object.freeze({
     "X-dtInjectedServlet",
     "X-ruxit-JS-Agent"
   ]
-})
+}
+)
 
 
 export const securityHeaders = (nonce: string): Headers => {
@@ -91,7 +93,7 @@ export const securityHeaders = (nonce: string): Headers => {
   owaspHeaders.set('X-Permitted-Cross-Domain-Policies', 'none');
   owaspHeaders.set('X-XSS-Protection', '0');
   owaspHeaders.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
-  
+
   return owaspHeaders;
 };
 

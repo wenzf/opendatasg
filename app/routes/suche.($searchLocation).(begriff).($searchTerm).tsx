@@ -30,7 +30,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
     const { pathname } = location
     return [
         { title: textsAndMetas.title },
-        { name: 'description', content: textsAndMetas.metaDescription },
+        {
+            name: 'description',
+            content: textsAndMetas.metaDescription
+        },
         {
             tagName: "link",
             rel: "canonical",

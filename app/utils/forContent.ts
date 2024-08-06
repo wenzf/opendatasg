@@ -272,7 +272,6 @@ export const createBreadCrumbProps = ({ params, page, searchParams, loaderData }
                     path: `/${KANTONSRAT}/${ABSTIMMUNG}`
                 })
                 breadCrumbRoot.push({
-                    //  label: abid,
                     // @ts-expect-error from loader
                     label: loaderData?.item?.title
                 })

@@ -15,7 +15,9 @@ export const BACKEND_CONFIG = Object.freeze({
             RATSINFO_FRAGMENT_BUSINESSES: '/businesses',
             RATSINFO_FRAGMENT_PUBLISHED_DOCUMENTS: '/published_documents',
             RATSINFO_FRAGMENT_BUSINESSE_PARTICIPATION: '/business_participations',
-            RATSINFO_FRAGMENT_VOTINGS: '/votings'
+            RATSINFO_FRAGMENT_VOTINGS: '/votings',
+            RATSINFO_FRAGMENT_GROUPS: '/groups',
+            RATSINFO_FRAGMENT_PEOPLE: '/people'
         },
 
         PARAMS: {
@@ -26,7 +28,8 @@ export const BACKEND_CONFIG = Object.freeze({
             OFFSET: "&offset=",
             WHERE: "where=",
             SELECT_ITEMS_DEFAULT: encodeURIComponent('published, link, title, bild_url, description, bild'),
-            SELECT_ITEMS_NO_IMAGE: encodeURIComponent('published, link, title, description')
+            SELECT_ITEMS_NO_IMAGE: encodeURIComponent('published, link, title, description'),
+            SEARCH: '&search='
         }
     },
     DDB: {

@@ -28,7 +28,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
 
     return [
         { title: `${data.item.title}: ${data.item.business.title}` },
-        { name: "description", content: `Abstimmung des Kantonsrates St.Gallen: ${data.item.business.title} (${data.item.title})` },
+        {
+            name: "description",
+            content: `Abstimmung des Kantonsrates St.Gallen: ${data.item.business.title} (${data.item.title})`
+        },
         {
             tagName: "link",
             rel: "canonical",

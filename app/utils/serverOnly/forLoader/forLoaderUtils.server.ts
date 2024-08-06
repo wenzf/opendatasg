@@ -19,8 +19,8 @@ export const checkIfDataIsCurrent = async (
     if (idx === null) return null
     const res: boolean[] = []
 
-    /** COMPLETE RESET OF INDEX ONCE IN 2 DAYS 
-     * (DATA_RESET_INTERVAL_TIME_IN_MS)
+    /** COMPLETE RESET OF INDEX ONCE IN
+     * DATA_RESET_INTERVAL_TIME_IN_MS
      * FORCING REFETCH OF FIRST 10 ITEMS PER CATEGORY
      * WHEN HOME ROUTE IS LOADED. 
      * 

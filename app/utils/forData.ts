@@ -5,9 +5,6 @@ import { Ballot, BallotModified } from "~/types/ratsinfoAPI";
 export const sorterBallots = (prop: keyof BallotModified, isAsc: boolean) => (a: BallotModified, b: BallotModified) => {
 
   try {
-
-
-
     const aProp = a[prop].toString().toUpperCase()
     const bProp = b[prop].toString().toUpperCase()
 

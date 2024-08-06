@@ -37,7 +37,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, params, data }) =>
     const optionalSearchParam = data?.keywordSearchParam ? SEARCH_PARAM_FRAGMENT + data.keywordSearchParam : ''
     return [
         { title },
-        { name: "description", content: metaDescription },
+        {
+            name: "description",
+            content: metaDescription
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -52,18 +55,18 @@ export const meta: MetaFunction<typeof loader> = ({ location, params, data }) =>
 
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-    const { DATA_API: { ENDPOINTS: { RATSINFO } } } = BACKEND_CONFIG
+    const { DATA_API: { ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_PEOPLE }, PARAMS: { SEARCH } } } = BACKEND_CONFIG
     const { ENTRIES_SHOWN_IN_RATSINFO, ROUTE_FRAGMENTS: { KANTONSRAT, PERSONEN } } = PUBLIC_CONFIG
     const { pageNum } = params;
     const { searchParams } = new URL(request.url);
     const keywordSearchParam = searchParams.get('search')
-    const optionalKeywordParam = keywordSearchParam ? `&search=${keywordSearchParam}` : ''
+    const optionalKeywordParam = keywordSearchParam ? SEARCH + keywordSearchParam : ''
 
     if (pageNum === '0' || pageNum === '1') return redirect(`/${KANTONSRAT}/${PERSONEN}`, { status: 302 })
 
     try {
         const page = pageNum ? pageNum : 1
-        const feedFromApiRaw = await fetch(RATSINFO + '/people' + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}&ordering=last_name`);
+        const feedFromApiRaw = await fetch(RATSINFO + RATSINFO_FRAGMENT_PEOPLE + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}&ordering=last_name`);
         const feedFromApi: { count: number, results: APIRatsinfoPeopleBase[] } = await feedFromApiRaw.json()
         if (feedFromApi) {
             return json({ ...feedFromApi, keywordSearchParam }, {

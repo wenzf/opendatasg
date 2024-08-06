@@ -39,7 +39,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, data, params }) =>
 
     return [
         { title },
-        { name: "description", content: metaDescription },
+        {
+            name: "description",
+            content: metaDescription
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -55,11 +58,13 @@ export const meta: MetaFunction<typeof loader> = ({ location, data, params }) =>
 
 export const loader: LoaderFunction = async ({ params, request }) => {
     const { ENTRIES_SHOWN_IN_RATSINFO, ROUTE_FRAGMENTS: { KANTONSRAT, ABSTIMMUNG } } = PUBLIC_CONFIG
-    const { DATA_API: { ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_VOTINGS } } } = BACKEND_CONFIG
+    const { DATA_API: {
+        ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_VOTINGS },
+        PARAMS: { SEARCH } } } = BACKEND_CONFIG
 
     const { searchParams } = new URL(request.url);
     const keywordSearchParam = searchParams.get('search')
-    const optionalKeywordParam = keywordSearchParam ? `&search=${keywordSearchParam}` : ''
+    const optionalKeywordParam = keywordSearchParam ? SEARCH + keywordSearchParam : ''
     const { pageNum } = params
     const page = pageNum ? pageNum : 1
 

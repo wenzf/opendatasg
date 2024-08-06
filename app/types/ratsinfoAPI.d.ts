@@ -85,7 +85,6 @@ export interface APIRatsinfoBusinessFull extends APIRatsinfoBusinessBase {
     dokumente: APIRatsinfoGeschaeftResultDokumente[]
     beteiligungen: APIRatsinfoGeschaeftBeteiligungen[]
     abstimmungen: APIRatsinfoVotingBase[]
-   /// abstimmungen: APIRatsinfoAbstimmungenResult[]
     is_public: boolean
     groups: Record<string, APIRatsinfoGroupBase>
     statements: APIRatsInfoBusinessStatement[]
@@ -302,19 +301,3 @@ export interface APIRatsinfoVotingFull extends APIRatsinfoVotingBase {
         assignee_id: null | string | number
     }
 }
-/*
-export interface APIRatsinfoAbstimmungenResult {
-    abstimmungs_id: string
-    abstimmungsgegenstand: string
-    sitzungs_id: number
-    sitzungstitel: string
-    geschafts_id: string
-    geschaftsnummer: string
-    geschaftstitel: string
-    geschaftsart_id: number
-    geschaftsart: string
-    abstimmungsdatum: string
-    link_zu_abstimmungsergebnissen: string
-}
-
-*/

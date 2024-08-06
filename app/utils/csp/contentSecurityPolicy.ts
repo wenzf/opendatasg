@@ -9,6 +9,8 @@ export const contentSecurityPolicy = (nonce: string): string => {
       ],
       'object-src': [NONE],
       'base-uri': [NONE],
+      'media-src': ['https://*.sg.ch'],
+      'img-src': ['*']
     }
   });
 };

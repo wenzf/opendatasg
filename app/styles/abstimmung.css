@@ -317,3 +317,8 @@
   background: var(--gray-3);
 }
 
+.td_sticky_1 {
+  position: sticky;
+  top: 2rem;
+  background-color: var(--gray-2);
+}

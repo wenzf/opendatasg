@@ -14,7 +14,7 @@ export const usePathHandle = () => {
     return null
 }
 
-
+// used to print meta data in headers
 export const useLoaderDataByPageHandle = () => {
     const matches = useMatches()
     if (!matches) return

@@ -38,7 +38,10 @@ export const meta: MetaFunction<typeof loader> = ({ location, params, data }) =>
     const optionalSearchParam = data?.keywordSearchParam ? SEARCH_PARAM_FRAGMENT + data.keywordSearchParam : ''
     return [
         { title },
-        { name: "description", content: metaDescription },
+        {
+            name: "description",
+            content: metaDescription
+        },
         {
             tagName: "link",
             rel: "canonical",
@@ -53,18 +56,18 @@ export const meta: MetaFunction<typeof loader> = ({ location, params, data }) =>
 
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-    const { DATA_API: { ENDPOINTS: { RATSINFO } } } = BACKEND_CONFIG
+    const { DATA_API: { ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_GROUPS }, PARAMS: { SEARCH } } } = BACKEND_CONFIG
     const { ENTRIES_SHOWN_IN_RATSINFO, ROUTE_FRAGMENTS: { KANTONSRAT, GREMIEN } } = PUBLIC_CONFIG
     const { pageNum } = params;
     const page = pageNum ? pageNum : 1
     const { searchParams } = new URL(request.url);
     const keywordSearchParam = searchParams.get('search')
-    const optionalKeywordParam = keywordSearchParam ? `&search=${keywordSearchParam}` : ''
+    const optionalKeywordParam = keywordSearchParam ? SEARCH + keywordSearchParam : ''
 
     if (pageNum === '0' || pageNum === '1') return redirect(`/${KANTONSRAT}/${GREMIEN}`, { status: 302 })
 
     try {
-        const feedFromApiRaw = await fetch(encodeURI(RATSINFO + '/groups' + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}`));
+        const feedFromApiRaw = await fetch(encodeURI(RATSINFO + RATSINFO_FRAGMENT_GROUPS + `?${optionalKeywordParam}&page=${page}&page_size=${ENTRIES_SHOWN_IN_RATSINFO}`));
         const feedFromApi: { count: number, results: APIRatsinfoGroupBase[] } = await feedFromApiRaw.json()
         if (feedFromApi.results) {
             return json({ ...feedFromApi, keywordSearchParam }, {

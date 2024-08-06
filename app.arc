@@ -3,7 +3,7 @@ opendatastgallen
 
 @aws
 runtime nodejs18.x
-  profile default
+#  profile default
   region us-east-1
   timeout 60
   concurrency 150

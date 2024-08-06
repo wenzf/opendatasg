@@ -13,6 +13,11 @@ const {
 const keyword = PLACEHOLDER_KEYWORD
 
 /**
+* TODO: MOVE STRINGS TO texts/metasAndTitles.json
+*/
+
+
+/**
  * for search routes; returns text fragments for meta data by params
  */
 export const textsAndMetasForSearchRouteByParams = (params: Params): {
@@ -21,7 +26,6 @@ export const textsAndMetasForSearchRouteByParams = (params: Params): {
     metaDescription: string,
 } => {
     const { searchLocation, searchTerm } = params
-
 
     let h1 = ''
     let title = ''
@@ -134,7 +138,7 @@ export const textAndMetasForFeedRoutesByParams = (params: Params) => {
 
 export const metasAndTitlesForRatsinfoFeedRoutes = (
     pageNum: string | undefined,
-    data: { keywordSearchParam: string |  null },
+    data: { keywordSearchParam: string | null },
     dict_regular: TextsAndMetas,
     dict_search: TextsAndMetas
 ) => {

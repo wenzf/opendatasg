@@ -17,7 +17,7 @@ const {
             ORDER_BY_PROP,
             SELECT
         },
-        ENDPOINTS: { RATSINFO }
+        ENDPOINTS: { RATSINFO, RATSINFO_FRAGMENT_GROUPS }
     }
 } = BACKEND_CONFIG;
 
@@ -142,7 +142,7 @@ export const dataAPIRatstinfoGroups = async (
     }
 
     for (let i = 0; i < groupIds.length; i += 1) {
-        groupCalls.push(fetch(`${RATSINFO}/groups/${groupIds[i]}`).then((it) => it.json()))
+        groupCalls.push(fetch(`${RATSINFO + RATSINFO_FRAGMENT_GROUPS}/${groupIds[i]}`).then((it) => it.json()))
     }
 
     const callRes = await Promise.all(groupCalls)
